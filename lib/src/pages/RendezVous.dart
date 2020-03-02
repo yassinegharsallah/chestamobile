@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:flutter_login/src/pages/ListeRdv.dart';
 class Post {
   final String userId;
   final int id;
@@ -59,7 +59,7 @@ class RendezVous extends StatelessWidget {
       ),
       home: Scaffold(
           appBar: AppBar(
-            title: Text('Create Post'),
+            title: Text('Rendez vous'),
           ),
           body: new Container(
             margin: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -68,12 +68,17 @@ class RendezVous extends StatelessWidget {
                 new TextField(
                   controller: titleControler,
                   decoration: InputDecoration(
-                      hintText: "title....", labelText: 'Post Title'),
+                      hintText: "Specialite", labelText: 'Specialite'),
                 ),
                 new TextField(
                   controller: bodyControler,
                   decoration: InputDecoration(
-                      hintText: "body....", labelText: 'Post Body'),
+                      hintText: "Medecin", labelText: 'Medecin Specialiste'),
+                ),
+                new TextField(
+                  controller: bodyControler,
+                  decoration: InputDecoration(
+                      hintText: "Date et temps", labelText: 'Date et temps Rendez vous'),
                 ),
                 new RaisedButton(
                   onPressed: () async {
@@ -83,8 +88,15 @@ class RendezVous extends StatelessWidget {
                         body: newPost.toMap());
                     print(p.title);
                   },
-                  child: const Text("Create"),
+                  child: const Text("Confirmer"),
                 )
+                ,
+                RaisedButton(
+                    child: Text("Mes Rendez-vous"),
+                    onPressed: () =>   Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => RdvList(),
+                    )
+                    ))
               ],
             ),
           )),
