@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_login/src/pages/DetailRdv.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -47,11 +48,24 @@ class RdvListState extends State<RdvList> {
     return new Scaffold(
       appBar: new AppBar(title: new Text("Listviews"), backgroundColor: Colors.blue),
       body: new ListView.builder(
+
         itemCount: data == null ? 0 : data.length,
-        itemBuilder: (BuildContext context, int index){
-          return new Card(
+               itemBuilder: (BuildContext context, int index){
+               return  new GestureDetector(
+                   onTap:  () =>   Navigator.of(context).pushReplacement(MaterialPageRoute(
+                     builder: (context) => DetailPage(),
+                   )),
+                   child: new Card(
+                       child: new Text(data[index]["idmedecin"]),
+                       margin: const EdgeInsets.only(top: 50.0)
+                   ),
+                 );
+
+        /*  return new Card(
             child: new Text(data[index]["idmedecin"]),
-          );
+            margin: const EdgeInsets.only(top: 50.0),
+            borderOnForeground: true,
+          ); */
         },
       ),
     );
