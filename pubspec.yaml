@@ -46,6 +46,7 @@ flutter:
   assets:
     - assets/images/ecorp.png
     - assets/images/ecorpchest.png
+    - assets/images/hulk.png
 
 
   #  - assets/images/placeholder-logo.png
