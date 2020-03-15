@@ -32,15 +32,15 @@ class _ListeMedecinsState extends State<ListeMedecins> {
   List<Medecin> items = new List<Medecin>();
 
   _ListeMedecinsState() {
-    items.add(new Medecin("assets/images/hulk.png", "Iron Man",
+    items.add(new Medecin("assets/images/thor.png", "Iron Man",
         "Genius. Billionaire. Playboy. Philanthropist. Tony Stark's confidence is only matched by his high-flying abilities as the hero called Iron Man."));
-    items.add(new Medecin("assets/images/hulk.png", "Captain America",
+    items.add(new Medecin("assets/images/thor.png", "Captain America",
         "Recipient of the Super-Soldier serum, World War II hero Steve Rogers fights for American ideals as one of the world’s mightiest heroes and the leader of the Avengers."));
-    items.add(new Medecin("assets/images/hulk.png", "Thor",
+    items.add(new Medecin("assets/images/thor.png", "Thor",
         "The son of Odin uses his mighty abilities as the God of Thunder to protect his home Asgard and planet Earth alike."));
-    items.add(new Medecin("assets/images/hulk.png", "Hulk",
+    items.add(new Medecin("assets/images/thor.png", "Hulk",
         "Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green monster powered by his rage."));
-    items.add(new Medecin("assets/images/hulk.png", "Black Widow",
+    items.add(new Medecin("assets/images/thor.png", "Black Widow",
         "Despite super spy Natasha Romanoff’s checkered past, she’s become one of S.H.I.E.L.D.’s most deadly assassins and a frequent member of the Avengers."));
   }
 
