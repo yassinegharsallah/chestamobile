@@ -30,36 +30,34 @@ class HomePageState extends State<RecommendedPage > {
       ),
       body: Center(
      //   child: widgetOptions.elementAt(selectedIndex),
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              FlatButton(
-                onPressed: () => {},
-                color: Colors.deepPurpleAccent,
-                padding: EdgeInsets.all(10.0),
-                child: Column( // Replace with a Row for horizontal icon + text
-                  children: <Widget>[
-                    Icon(Icons.photo_camera),
-                    Text("Scan XRAY")
-                  ],
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            FlatButton(
+              onPressed: () => {},
+              color: Colors.deepPurpleAccent,
+              padding: EdgeInsets.all(10.0),
+              child: Column( // Replace with a Row for horizontal icon + text
+                children: <Widget>[
+                  Icon(Icons.photo_camera),
+                  Text("Scan XRAY")
+                ],
               ),
-              FlatButton(
-                color: Colors.white,
-                onPressed: () =>   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => Diagnosis(),
-               // padding: EdgeInsets.all(10.0),
-               // child: Column( // Replace with a Row for horizontal icon + text
-                 // children: <Widget>[
-                   // Icon(Icons.show_chart),
-                   // Text("Previous Scans"),
-                  //],
-                ),
-              )
-              ,
-              )],
-          ),
+            ),
+            FlatButton(
+              color: Colors.white,
+              onPressed: () =>   Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => Diagnosis(),
+             // padding: EdgeInsets.all(10.0),
+             // child: Column( // Replace with a Row for horizontal icon + text
+               // children: <Widget>[
+                 // Icon(Icons.show_chart),
+                 // Text("Previous Scans"),
+                //],
+              ),
+            )
+            ,
+            )],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

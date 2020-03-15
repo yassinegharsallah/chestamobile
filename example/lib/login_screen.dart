@@ -9,6 +9,12 @@ import 'users.dart';
 import 'package:flutter_login/home_page.dart';
 import 'package:flutter_login/src/pages/home_page.dart';
 import 'package:flutter_login/src/pages/RendezVous.dart';
+import 'package:http/http.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -148,17 +154,52 @@ class LoginScreen extends StatelessWidget {
       passwordValidator: (value) {
         if (value.isEmpty) {
           return 'Password is empty';
+
         }
         return null;
       },
-      onLogin: (loginData) {
-        print('Login info');
-        print('Name: ${loginData.name}');
-        print('Password: ${loginData.password}');
-        Navigator.push(context, new MaterialPageRoute(
-            builder: (context) =>
-            new RendezVous())
-        );
+      onLogin: (loginData) async {
+        print('Login infoR');
+
+        // LOGIN GET REQUEST IS HERE
+        var url ='http://10.0.2.2:4000/user/login';
+        var body = jsonEncode({
+          'email' : 'AlexandertttTrent@esprit.tn',
+          'password' : 'dshd58dfdfdfd'  });
+
+        print("Body: " + body);
+
+        http.post(url,
+            headers: {"Content-Type": "application/json"},
+            body: body
+        ).then((http.Response response) async {
+          print("Response status: ${response.statusCode}");
+          print("Response body: ${response.body}");
+          print(response.headers);
+          print(response.request);
+          //JSON DECODEER
+          var parsedJson = json.decode(response.body);
+          print(parsedJson['token']);
+          if(parsedJson['token']!= null){
+            String urlLogin = 'http://10.0.2.2:4000/user/me';
+            Response GetLoginResponse = await get(urlLogin,headers: {"Content-type": "application/json","token":parsedJson['token']});
+            print("********** LOGGED IN USER ***********")  ;
+            print(GetLoginResponse.body);
+            Navigator.push(context, new MaterialPageRoute(
+                builder: (context) =>
+                new RendezVous(todo : "jsjdsdsd"))
+            );
+
+          }else{
+            print('wrong login credentials');
+          }
+
+          //JSON DECODER
+
+        });
+        // LOGIN GET REQUEST IS HERE
+
+
 
       },
       onSignup: (loginData) {

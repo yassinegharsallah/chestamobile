@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_login/src/pages/ListeRdv.dart';
+
 class Post {
   final String userId;
   final int id;
@@ -43,8 +43,9 @@ Future<Post> createPost(String url, {Map body}) async {
 
 class RendezVous extends StatelessWidget {
   final Future<Post> post;
+  final String todo;
 
-  RendezVous({Key key, this.post}) : super(key: key);
+  RendezVous({Key key, this.post,this.todo}) : super(key: key);
   static final CREATE_POST_URL = 'https://jsonplaceholder.typicode.com/posts';
   TextEditingController titleControler = new TextEditingController();
   TextEditingController bodyControler = new TextEditingController();
@@ -59,7 +60,7 @@ class RendezVous extends StatelessWidget {
       ),
       home: Scaffold(
           appBar: AppBar(
-            title: Text('Rendez vous'),
+            title: Text(this.todo),
           ),
           body: new Container(
             margin: const EdgeInsets.only(left: 8.0, right: 8.0),
@@ -68,17 +69,12 @@ class RendezVous extends StatelessWidget {
                 new TextField(
                   controller: titleControler,
                   decoration: InputDecoration(
-                      hintText: "Specialite", labelText: 'Specialite'),
+                      hintText: "title....", labelText: 'Post Title'),
                 ),
                 new TextField(
                   controller: bodyControler,
                   decoration: InputDecoration(
-                      hintText: "Medecin", labelText: 'Medecin Specialiste'),
-                ),
-                new TextField(
-                  controller: bodyControler,
-                  decoration: InputDecoration(
-                      hintText: "Date et temps", labelText: 'Date et temps Rendez vous'),
+                      hintText: "body....", labelText: 'Post Body'),
                 ),
                 new RaisedButton(
                   onPressed: () async {
@@ -88,15 +84,8 @@ class RendezVous extends StatelessWidget {
                         body: newPost.toMap());
                     print(p.title);
                   },
-                  child: const Text("Confirmer"),
+                  child: const Text("Create"),
                 )
-                ,
-                RaisedButton(
-                    child: Text("Mes Rendez-vous"),
-                    onPressed: () =>   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => RdvList(),
-                    )
-                    ))
               ],
             ),
           )),
