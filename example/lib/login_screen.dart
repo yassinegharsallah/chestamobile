@@ -14,6 +14,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:flutter_login/src/pages/ListeMedecins.dart';
 
 
 class LoginScreen extends StatelessWidget {
@@ -187,7 +188,7 @@ class LoginScreen extends StatelessWidget {
             print(GetLoginResponse.body);
             Navigator.push(context, new MaterialPageRoute(
                 builder: (context) =>
-                new RendezVous(todo : "jsjdsdsd"))
+                new ListeMedecins(title : 'Title'))
             );
 
           }else{

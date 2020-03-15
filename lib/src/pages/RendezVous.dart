@@ -4,11 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Post {
-  final String userId;
-  final int id;
-  final String title;
-  final String body;
-
   Post({this.userId, this.id, this.title, this.body});
 
   factory Post.fromJson(Map<String, dynamic> json) {
@@ -19,6 +14,11 @@ class Post {
       body: json['body'],
     );
   }
+
+  final String body;
+  final int id;
+  final String title;
+  final String userId;
 
   Map toMap() {
     var map = new Map<String, dynamic>();
@@ -42,13 +42,14 @@ Future<Post> createPost(String url, {Map body}) async {
 }
 
 class RendezVous extends StatelessWidget {
-  final Future<Post> post;
-  final String todo;
-
   RendezVous({Key key, this.post,this.todo}) : super(key: key);
+
   static final CREATE_POST_URL = 'https://jsonplaceholder.typicode.com/posts';
-  TextEditingController titleControler = new TextEditingController();
+
   TextEditingController bodyControler = new TextEditingController();
+  final Future<Post> post;
+  TextEditingController titleControler = new TextEditingController();
+  final String todo;
 
   @override
   Widget build(BuildContext context) {
