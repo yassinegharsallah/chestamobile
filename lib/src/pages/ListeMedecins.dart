@@ -1,20 +1,14 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_login/src/models/User.dart';
 import 'detail.dart';
 
 class ListeMedecins extends StatefulWidget {
   ListeMedecins({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
+
 
   @override
   _ListeMedecinsState createState() => _ListeMedecinsState();
@@ -30,18 +24,41 @@ class Medecin {
 
 class _ListeMedecinsState extends State<ListeMedecins> {
   List<Medecin> items = new List<Medecin>();
+ List data;
+
+
 
   _ListeMedecinsState() {
-    items.add(new Medecin("assets/images/thor.png", "Iron Man",
-        "Genius. Billionaire. Playboy. Philanthropist. Tony Stark's confidence is only matched by his high-flying abilities as the hero called Iron Man."));
-    items.add(new Medecin("assets/images/thor.png", "Captain America",
-        "Recipient of the Super-Soldier serum, World War II hero Steve Rogers fights for American ideals as one of the world’s mightiest heroes and the leader of the Avengers."));
-    items.add(new Medecin("assets/images/thor.png", "Thor",
-        "The son of Odin uses his mighty abilities as the God of Thunder to protect his home Asgard and planet Earth alike."));
-    items.add(new Medecin("assets/images/thor.png", "Hulk",
-        "Dr. Bruce Banner lives a life caught between the soft-spoken scientist he’s always been and the uncontrollable green monster powered by his rage."));
-    items.add(new Medecin("assets/images/thor.png", "Black Widow",
-        "Despite super spy Natasha Romanoff’s checkered past, she’s become one of S.H.I.E.L.D.’s most deadly assassins and a frequent member of the Avengers."));
+    /* Fetching Data Into ListView */
+
+    Future<String> getData() async {
+      var response = await http.get(
+          Uri.encodeFull("http://10.0.2.2:4000/user/GetAllMedecins"),
+          headers: {
+            "Accept": "application/json"
+          }
+      );
+
+      this.setState(() {
+
+        this.data = json.decode(response.body);
+      });
+
+
+      return "Success";
+    }
+
+   // await getData()  ;  // <--- your code needs to pause until the Future returns.
+    print('GET  DATA GET ');
+    getData().then((data){
+      for(int i=0 ; i<this.data.length;i++){
+        print(this.data[i]["email"]);
+        print(i);
+        items.add(new Medecin("assets/images/hulk.png", this.data[i]["nom"], this.data[i]["email"]));
+      }
+    });
+
+    /* Fetching Data Into ListView */
   }
 
   Widget MedcCell(BuildContext ctx, int index) {
@@ -102,4 +119,5 @@ class _ListeMedecinsState extends State<ListeMedecins> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
 }
