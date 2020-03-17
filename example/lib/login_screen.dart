@@ -4,15 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'constants.dart';
 import 'custom_route.dart';
-import 'dashboard_screen.dart';
 import 'users.dart';
-import 'package:flutter_login/home_page.dart';
 import 'package:flutter_login/src/pages/home_page.dart';
-import 'package:flutter_login/src/pages/RendezVous.dart';
 import 'package:http/http.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_login/src/pages/ListeMedecins.dart';
 
@@ -169,7 +166,6 @@ class LoginScreen extends StatelessWidget {
           'password' : 'dshd58dfdfdfd'  });
 
         print("Body: " + body);
-
         http.post(url,
             headers: {"Content-Type": "application/json"},
             body: body
@@ -180,12 +176,20 @@ class LoginScreen extends StatelessWidget {
           print(response.request);
           //JSON DECODEER
           var parsedJson = json.decode(response.body);
-          print(parsedJson['token']);
           if(parsedJson['token']!= null){
             String urlLogin = 'http://10.0.2.2:4000/user/me';
             Response GetLoginResponse = await get(urlLogin,headers: {"Content-type": "application/json","token":parsedJson['token']});
             print("********** LOGGED IN USER ***********")  ;
             print(GetLoginResponse.body);
+            /*save into shared pref*/
+            var parsedBody = json.decode(GetLoginResponse.body);
+            String username = parsedBody['email'];
+            print('username from parsed body '+username);
+            final prefs = await SharedPreferences.getInstance();
+            prefs.setString('username',parsedBody['username']);
+            prefs.setString('email', parsedBody['email']) ;
+            /*save into shared pref*/
+
             Navigator.push(context, new MaterialPageRoute(
                 builder: (context) =>
                 new ListeMedecins(title : 'Title'))

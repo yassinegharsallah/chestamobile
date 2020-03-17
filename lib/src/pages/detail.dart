@@ -45,8 +45,15 @@ class _MyDetailPageState extends State<MyDetailPage> {
             child: Container(
               padding: EdgeInsets.all(16),
               child: Text(Medc.body),
-            )
+            ),
           ),
+          IconButton(
+              icon: Icon(Icons.rate_review),
+              color: Colors.blueAccent,
+              onPressed: (){
+
+      })
+      ,
         ],
       )),
     );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_login/src/models/User.dart';
 import 'detail.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ListeMedecins extends StatefulWidget {
   ListeMedecins({Key key, this.title}) : super(key: key);
@@ -58,12 +59,19 @@ class _ListeMedecinsState extends State<ListeMedecins> {
       }
     });
 
+
     /* Fetching Data Into ListView */
   }
 
   Widget MedcCell(BuildContext ctx, int index) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        final prefs = await SharedPreferences.getInstance();
+        final username = prefs.getString('username');
+        final email = prefs.getString('email');
+        print('******************************************************************************');
+        print(username);
+        print(email) ;
         final snackBar = SnackBar(content: Text("Tap"));
         Navigator.push(
             context,
