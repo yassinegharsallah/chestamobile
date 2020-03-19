@@ -22,7 +22,7 @@ class RdvListState extends State<RdvList> {
 
   Future<String> getData() async {
     var response = await http.get(
-        Uri.encodeFull("http://10.0.2.2:3000/users"),
+        Uri.encodeFull("http://192.168.1.12:3000/users"),
         headers: {
           "Accept": "application/json"
         }

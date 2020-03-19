@@ -57,7 +57,7 @@ class _MyDetailPageState extends State<MyDetailPage> {
               color: Colors.blueAccent,
               onPressed: () async {
                 // LOGIN GET REQUEST IS HERE
-                var url ='http://10.0.2.2:4000/user/AddRdv';
+                var url ='http://192.168.1.12:4000/user/AddRdv';
                 final prefs = await SharedPreferences.getInstance();
                 var body = jsonEncode({
                   'idpatient' : prefs.getString('idLoggedinUser'),

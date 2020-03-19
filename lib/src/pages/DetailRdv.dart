@@ -116,7 +116,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 onPressed:  () async {
                   Post newPost = new Post(
                       userId: "123", id: 0, title: '', body: '');
-                  Post p = await createPost("http://10.0.2.2:3000/addReminder/newreminder/test/test",
+                  Post p = await createPost("http://192.168.1.12:3000/addReminder/newreminder/test/test",
                       body: newPost.toMap());
                   print(p.title);
                 },
@@ -129,7 +129,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 onPressed:  () async {
                   Post newPost = new Post(
                       userId: "123", id: 0, title: '', body: '');
-                  Post p = await createPost("http://10.0.2.2:3000/addReminder/newreminder/test/test",
+                  Post p = await createPost("http://192.168.1.12:3000/addReminder/newreminder/test/test",
                       body: newPost.toMap());
                   print(p.title);
                 },

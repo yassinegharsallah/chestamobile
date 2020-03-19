@@ -17,9 +17,10 @@ import 'package:flutter_login/src/pages/ListeMedecins.dart';
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
 
-  Duration get loginTime => Duration(milliseconds: timeDilation.ceil() * 2250);
+  /*Duration get loginTime => Duration(milliseconds: timeDilation.ceil() * 6000000);
 
   Future<String> _loginUser(LoginData data) {
+
     return Future.delayed(loginTime).then((_) {
    if (!mockUsers.containsKey(data.name)) {
         return 'Username not exists';
@@ -39,7 +40,7 @@ class LoginScreen extends StatelessWidget {
       }
       return null;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -157,13 +158,14 @@ class LoginScreen extends StatelessWidget {
         return null;
       },
       onLogin: (loginData) async {
-        print('Login infoR');
-
+        print('Login info');
         // LOGIN GET REQUEST IS HERE
-        var url ='http://10.0.2.2:4000/user/login';
+        //AlexandertttTrent@esprit.tn
+        //dshd58dfdfdfd
+        var url ='http://192.168.1.12:4000/user/login';
         var body = jsonEncode({
-          'email' : 'AlexandertttTrent@esprit.tn',
-          'password' : 'dshd58dfdfdfd'  });
+          'email' : loginData.name,
+          'password' : loginData.password  });
 
         print("Body: " + body);
         http.post(url,
@@ -177,24 +179,34 @@ class LoginScreen extends StatelessWidget {
           //JSON DECODEER
           var parsedJson = json.decode(response.body);
           if(parsedJson['token']!= null){
-            String urlLogin = 'http://10.0.2.2:4000/user/me';
+            String urlLogin = 'http://192.168.1.12:4000/user/me';
             Response GetLoginResponse = await get(urlLogin,headers: {"Content-type": "application/json","token":parsedJson['token']});
             print("********** LOGGED IN USER ***********")  ;
             print(GetLoginResponse.body);
             /*save into shared pref*/
             var parsedBody = json.decode(GetLoginResponse.body);
-            String id = parsedBody['_id'];
-            print('username from parsed body '+id);
+
             final prefs = await SharedPreferences.getInstance();
             prefs.setString('username',parsedBody['username']);
             prefs.setString('email', parsedBody['email']) ;
             prefs.setString('idLoggedinUser',parsedBody['_id']) ;
             /*save into shared pref*/
+             //redirection after login
+              if(parsedBody['email'] == 'med@gmail.com'){
+                print('Medecin');
+                Navigator.push(context, new MaterialPageRoute(
+                    builder: (context) =>
+                    new ListeMedecins(title : 'Title'))
+                );
+              }else{
+                print('Patient');
+                Navigator.push(context, new MaterialPageRoute(
+                    builder: (context) =>
+                    new ListeMedecins(title : 'Title'))
+                );
+              }
+             //redirection after login
 
-            Navigator.push(context, new MaterialPageRoute(
-                builder: (context) =>
-                new ListeMedecins(title : 'Title'))
-            );
 
           }else{
             print('wrong login credentials');
@@ -218,14 +230,12 @@ class LoginScreen extends StatelessWidget {
         );
       },
       onSubmitAnimationCompleted: () {
-        Navigator.of(context).pushReplacement(FadePageRoute(
-          builder: (context) => HomePagex(),
-        ));
+
       },
       onRecoverPassword: (name) {
         print('Recover password info');
         print('Name: $name');
-        return _recoverPassword(name);
+      //  return _recoverPassword(name);
         // Show new password dialog
       },
       showDebugButtons: true,

@@ -35,7 +35,7 @@ class _ListeMedecinsState extends State<ListeMedecins> {
 
     Future<String> getData() async {
       var response = await http.get(
-          Uri.encodeFull("http://10.0.2.2:4000/user/GetAllMedecins"),
+          Uri.encodeFull("http://192.168.1.12:4000/user/GetAllMedecins"),
           headers: {
             "Accept": "application/json"
           }
