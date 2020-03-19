@@ -19,8 +19,9 @@ class Medecin {
   final String img;
   final String title;
   final String body;
+  final String idMedecin ;
 
-  Medecin(this.img, this.title, this.body);
+  Medecin(this.img, this.title, this.body,this.idMedecin);
 }
 
 class _ListeMedecinsState extends State<ListeMedecins> {
@@ -55,7 +56,7 @@ class _ListeMedecinsState extends State<ListeMedecins> {
       for(int i=0 ; i<this.data.length;i++){
         print(this.data[i]["email"]);
         print(i);
-        items.add(new Medecin("assets/images/hulk.png", this.data[i]["nom"], this.data[i]["email"]));
+        items.add(new Medecin("assets/images/hulk.png", this.data[i]["nom"], this.data[i]["email"],this.data[i]["_id"]));
       }
     });
 
@@ -69,9 +70,11 @@ class _ListeMedecinsState extends State<ListeMedecins> {
         final prefs = await SharedPreferences.getInstance();
         final username = prefs.getString('username');
         final email = prefs.getString('email');
+        final idLoggedInuser = prefs.getString('idLoggedinUser');
         print('******************************************************************************');
         print(username);
         print(email) ;
+        print("id Logged in user : "+idLoggedInuser) ;
         final snackBar = SnackBar(content: Text("Tap"));
         Navigator.push(
             context,

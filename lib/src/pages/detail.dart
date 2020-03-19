@@ -1,9 +1,14 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'ListeMedecins.dart';
+import 'package:http/http.dart' as http;
 
 class MyDetailPage extends StatefulWidget {
   Medecin _Medc;
+  String idpatient  ;
 
   MyDetailPage(Medecin Medc) {
     _Medc = Medc;
@@ -50,7 +55,28 @@ class _MyDetailPageState extends State<MyDetailPage> {
           IconButton(
               icon: Icon(Icons.rate_review),
               color: Colors.blueAccent,
-              onPressed: (){
+              onPressed: () async {
+                // LOGIN GET REQUEST IS HERE
+                var url ='http://10.0.2.2:4000/user/AddRdv';
+                final prefs = await SharedPreferences.getInstance();
+                var body = jsonEncode({
+                  'idpatient' : prefs.getString('idLoggedinUser'),
+                  'idmedecin' : this.Medc.idMedecin  });
+
+                print("Body: " + body);
+
+                http.post(url,
+                    headers: {"Content-Type": "application/json"},
+                    body: body
+                ).then((http.Response response) async {
+                  print("Response status: ${response.statusCode}");
+                  print("Response body: ${response.body}");
+                  print(response.headers);
+                  print(response.request);
+                  //JSON DECODEER
+
+                });
+                // LOGIN GET REQUEST IS HERE
 
       })
       ,

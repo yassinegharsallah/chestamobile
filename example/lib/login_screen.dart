@@ -183,11 +183,12 @@ class LoginScreen extends StatelessWidget {
             print(GetLoginResponse.body);
             /*save into shared pref*/
             var parsedBody = json.decode(GetLoginResponse.body);
-            String username = parsedBody['email'];
-            print('username from parsed body '+username);
+            String id = parsedBody['_id'];
+            print('username from parsed body '+id);
             final prefs = await SharedPreferences.getInstance();
             prefs.setString('username',parsedBody['username']);
             prefs.setString('email', parsedBody['email']) ;
+            prefs.setString('idLoggedinUser',parsedBody['_id']) ;
             /*save into shared pref*/
 
             Navigator.push(context, new MaterialPageRoute(
