@@ -22,9 +22,10 @@ class RdvListState extends State<RdvList> {
 
   Future<String> getData() async {
     var response = await http.get(
-        Uri.encodeFull("http://192.168.1.12:3000/users"),
+        Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvMedecin"),
         headers: {
-          "Accept": "application/json"
+          "Accept": "application/json",
+          "token" : "5e5aa519190d8c2818a66a0a"
         }
     );
 

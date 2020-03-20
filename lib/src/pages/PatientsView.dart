@@ -4,9 +4,11 @@ import 'package:flutter_login/home_page.dart';
 import 'Dashboard.dart';
 import 'addPatient.dart';
 
-void mainz() => runApp(PatientsView());
 
 class PatientsView extends StatelessWidget {
+
+
+
   @override
   Widget build(BuildContext context) {
     final title = 'Patients List';

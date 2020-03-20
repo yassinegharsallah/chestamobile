@@ -12,7 +12,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_login/src/pages/ListeMedecins.dart';
-
+import 'package:flutter_login/src/pages/RendezVousMedecin.dart' ;
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -196,7 +196,7 @@ class LoginScreen extends StatelessWidget {
                 print('Medecin');
                 Navigator.push(context, new MaterialPageRoute(
                     builder: (context) =>
-                    new ListeMedecins(title : 'Title'))
+                    new RendezVousMedecin(title: 'Rendez-Vous',))
                 );
               }else{
                 print('Patient');
