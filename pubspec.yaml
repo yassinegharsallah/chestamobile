@@ -20,6 +20,7 @@ dependencies:
   flutter_bloc:
   http: ^0.12.0+4
   shared_preferences: ^0.4.2
+  simple_gesture_detector: ^0.1.3
 
   # flutter_test from sdk depends on quiver 2.0.5
   quiver: ^2.0.5
@@ -32,6 +33,8 @@ dev_dependencies:
   path_provider:
   carousel_widget: ^0.1.1
   http: ^0.12.0+4
+  simple_gesture_detector: ^0.1.3
+  intl:	">=0.15.0 <0.17.0"
 
   flutter_image_pick_crop:
   path:
