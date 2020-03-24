@@ -16,7 +16,7 @@ dependencies:
   # dummy package to test https://github.com/NearHuscarl/flutter_login/issues/35
   provider: ^4.0.1
   shared_preferences: ^0.4.2
-
+  table_calendar: ^2.0.1
 
 dev_dependencies:
   flutter_test:
