@@ -38,6 +38,7 @@ dev_dependencies:
   flutter_calendar: ^0.0.1
   cupertino_icons: ^0.1.2
   table_calendar: ^2.0.1
+  date_format: ^2.0.0
 
   flutter_image_pick_crop:
   path:

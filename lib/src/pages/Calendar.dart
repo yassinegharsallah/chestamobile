@@ -1,5 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'History.dart' ;
+import 'package:http/http.dart' as http;
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -19,10 +23,29 @@ class Calendar extends StatefulWidget {
   @override
   _CalendarState createState() => _CalendarState();
 }
+class RendezVous {
+  final String img;
+  final String title;
+  final String body;
+  final String idMedecin ;
 
+  RendezVous(this.img, this.title, this.body,this.idMedecin);
+}
 class _CalendarState extends State<Calendar> {
   CalendarController _controller;
+//fetch data
+  List<RendezVous> items = new List<RendezVous>();
+  List data;
 
+
+
+  _RendezVousMedecinState() {
+
+
+
+    /* Fetching Data Into ListView */
+  }
+//fetch data
   @override
   void initState() {
     // TODO: implement initState
@@ -60,7 +83,37 @@ class _CalendarState extends State<Calendar> {
               ),
               startingDayOfWeek: StartingDayOfWeek.monday,
               onDaySelected: (date, events) {
-                print(date.toIso8601String());
+                String SelectedDate = date.toString();
+                /* Fetching Data Into ListView */
+
+                Future<String> getData() async {
+                  var response = await http.get(
+                      Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvMedecin"),
+                      headers: {
+                        "Accept": "application/json",
+                        "token" : "5e73d3e073761a37a036ce3a"
+                      }
+                  );
+
+                  this.setState(() {
+                    print(response.body);
+                    this.data = json.decode(response.body);
+                  });
+
+
+                  return "Success";
+                }
+
+                // await getData()  ;  // <--- your code needs to pause until the Future returns.
+                print('S7SSSSSS W SOUSOU');
+                getData().then((data){
+                  for(int i=0 ; i<this.data.length;i++){
+                    //  print(this.data[i]["email"]);
+                    //   print(i);
+                    items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"]));
+                  }
+                });
+
               },
               builders: CalendarBuilders(
                 selectedDayBuilder: (context, date, events) => Container(
@@ -85,10 +138,33 @@ class _CalendarState extends State<Calendar> {
                     )),
               ),
               calendarController: _controller,
-            )
+            ),
+            new Row(
+              children: <Widget>[
+                Expanded(
+                  child: SizedBox(
+                    height: 200.0,
+                    child: new ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:5,
+                      itemBuilder: (BuildContext ctxt, int index) {
+                        return new Text('');
+                      },
+                    ),
+                  ),
+                ),
+                new IconButton(
+                  icon: Icon(Icons.remove_circle),
+                  onPressed: () {},
+                ),
+              ],
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            
           ],
         ),
       ),
+
     );
   }
 }
