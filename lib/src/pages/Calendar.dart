@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'History.dart' ;
 import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
@@ -149,7 +148,17 @@ class _CalendarState extends State<Calendar> {
                       scrollDirection: Axis.horizontal,
                       itemCount:this.items.length,
                       itemBuilder: (BuildContext ctxt, int index) {
-                        return new Text(items[0].idMedecin);
+                        return   new Container(
+                            padding: new EdgeInsets.only(top: 16.0),
+                        child: new Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(Icons.access_time),
+                            //items[index].idMedecin
+                            Text('12:45H')
+                          ],
+                      ));
                       },
                     ),
                   ),
