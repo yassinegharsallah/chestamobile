@@ -68,8 +68,8 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
     getData().then((data) async {
         this.RequestedRdv.idMedecin = this.data[0]["idmedecin"];
         this.RequestedRdv.idpatient = this.data[0]["idpatient"];
-        this.RequestedRdv.idpatient = this.data[0]["idpatient"];
-        this.RequestedRdv.idpatient = this.data[0]["idpatient"];
+        this.RequestedRdv.Date = this.data[0]["date"];
+        this.RequestedRdv.heure = this.data[0]["heure"];
 
         final prefs = await SharedPreferences.getInstance();
         this.RequestedRdv.idRdv = prefs.get('idRendezVous') ;
@@ -97,12 +97,12 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
           children: <Widget>[
             ListTile(
                 leading: Icon(Icons.access_time),
-                title: Text(this.RequestedRdv.idMedecin)
+                title: Text(this.RequestedRdv.heure+' h')
                 ,
             ),
             ListTile(
               leading: Icon(Icons.date_range),
-              title: Text(this.RequestedRdv.idpatient),
+              title: Text(this.RequestedRdv.Date.substring(0,10)),
             ),
             RaisedButton(
                 child: Text("Confirmer Rendez Vous"),
