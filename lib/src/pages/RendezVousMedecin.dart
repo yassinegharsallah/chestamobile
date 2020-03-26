@@ -25,17 +25,24 @@ class RendezVous {
 
   RendezVous(this.img, this.title, this.body,this.idMedecin);
 }
-
+class Patient {
+  final String nom;
+  final String prenom;
+  Patient(this.nom, this.prenom);
+}
 class _RendezVousMedecinState extends State<RendezVousMedecin> {
   List<RendezVous> items = new List<RendezVous>();
+  List<Patient> Patientsitems = new List<Patient>();
   List data;
-
+  List Patients ;
 
 
   _RendezVousMedecinState() {
     /* Fetching Data Into ListView */
 
     Future<String> getData() async {
+//      final prefs = await SharedPreferences.getInstance();
+//Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
           Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvMedecin"),
           headers: {
@@ -53,15 +60,44 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
       return "Success";
     }
 
-    // await getData()  ;  // <--- your code needs to pause until the Future returns.
+//Get Patient Data
+    Future<String> getPatientData(String idpatient) async {
+//      final prefs = await SharedPreferences.getInstance();
+//Mtensech tzid id el logged in user mel prefs
+      var response = await http.get(
+          Uri.encodeFull("http://192.168.1.12:4000/user/GetUserByID"),
+          headers: {
+            "Accept": "application/json",
+            "token" : idpatient
+          }
+      );
+      print('PATIENTS EXECUTION');
+      this.setState(() {
+
+        this.Patients = json.decode(response.body);
+      });
+
+
+      return "Success";
+    }
+//Get Patient Data
+
     print('GET  DATA GET ');
-    getData().then((data){
+    getData().then((data) async {
       for(int i=0 ; i<this.data.length;i++){
       //  print(this.data[i]["email"]);
-     //   print(i);
+        print(i); print('nfetchi fel patient');
+        getPatientData(this.data[i]["idpatient"]).then((data) async {
+          for(int j=0 ; j<this.data.length;j++){
+            print(this.Patients[j]['email']);
+            Patientsitems.add(new Patient(this.Patients[j]['nom'],this.Patients[j]['prenom']));
+            print('J VALUE :'); print(j);
+          }
+        });
         items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"]));
       }
     });
+
 
 
     /* Fetching Data Into ListView */
@@ -102,7 +138,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
                       width: 16,
                     ),
                     Text(
-                      items[index].title,
+                      Patientsitems[index].nom+' '+Patientsitems[index].prenom,
                       style:
                       TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),

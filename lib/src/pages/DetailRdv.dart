@@ -30,7 +30,8 @@ class RendezVous {
   String idRdv ;
   String idpatient ;
   String idMedecin ;
-
+  String Date ;
+  String heure ;
   RendezVous(this.idMedecin, this.idpatient);
 }
 
@@ -67,6 +68,9 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
     getData().then((data) async {
         this.RequestedRdv.idMedecin = this.data[0]["idmedecin"];
         this.RequestedRdv.idpatient = this.data[0]["idpatient"];
+        this.RequestedRdv.idpatient = this.data[0]["idpatient"];
+        this.RequestedRdv.idpatient = this.data[0]["idpatient"];
+
         final prefs = await SharedPreferences.getInstance();
         this.RequestedRdv.idRdv = prefs.get('idRendezVous') ;
         print('id rdv '); print(this.RequestedRdv.idRdv);
@@ -92,12 +96,12 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
         body: ListView(
           children: <Widget>[
             ListTile(
-                leading: Icon(Icons.show_chart),
+                leading: Icon(Icons.access_time),
                 title: Text(this.RequestedRdv.idMedecin)
                 ,
             ),
             ListTile(
-              leading: Icon(Icons.recent_actors),
+              leading: Icon(Icons.date_range),
               title: Text(this.RequestedRdv.idpatient),
             ),
             RaisedButton(
