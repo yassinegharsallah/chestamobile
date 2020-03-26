@@ -86,12 +86,12 @@ class _CalendarState extends State<Calendar> {
                 String SelectedDate = date.toString();
                 /* Fetching Data Into ListView */
 
-                Future<String> getData() async {
+                Future<String> getData(String id) async {
                   var response = await http.get(
-                      Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvMedecin"),
+                      Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvByDate"),
                       headers: {
                         "Accept": "application/json",
-                        "token" : "5e73d3e073761a37a036ce3a"
+                        "token" : id
                       }
                   );
 
@@ -106,9 +106,10 @@ class _CalendarState extends State<Calendar> {
 
                 // await getData()  ;  // <--- your code needs to pause until the Future returns.
                 print('S7SSSSSS W SOUSOU');
-                getData().then((data){
+                getData(date.toIso8601String()
+                ).then((data){
                   for(int i=0 ; i<this.data.length;i++){
-                    //  print(this.data[i]["email"]);
+                    print(this.data[i]["_id"]);
                     //   print(i);
                     items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"]));
                   }
@@ -146,9 +147,9 @@ class _CalendarState extends State<Calendar> {
                     height: 200.0,
                     child: new ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount:5,
+                      itemCount:this.items.length,
                       itemBuilder: (BuildContext ctxt, int index) {
-                        return new Text('');
+                        return new Text(items[0].idMedecin);
                       },
                     ),
                   ),
