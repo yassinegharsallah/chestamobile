@@ -6,6 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'ListeMedecins.dart';
 import 'package:http/http.dart' as http;
 
+import 'Reminder/full_page_analog_time_picker.dart';
+
 class MyDetailPage extends StatefulWidget {
   Medecin _Medc;
   String idpatient  ;
@@ -78,8 +80,22 @@ class _MyDetailPageState extends State<MyDetailPage> {
                 });
                 // LOGIN GET REQUEST IS HERE
 
-      })
-      ,
+      }),
+
+        RaisedButton.icon(
+          onPressed: () =>   Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => FullPageAnalogTimePicker())),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          label: Text('Set Reminder',
+            style: TextStyle(color: Colors.white),),
+          icon: Icon(Icons.timer, color:Colors.white,),
+          textColor: Colors.white,
+          splashColor: Colors.red,
+          color: Colors.lightBlue,)
+          ,
         ],
       )),
     );

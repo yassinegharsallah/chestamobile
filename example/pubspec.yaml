@@ -30,6 +30,7 @@ flutter:
   - assets/images/ecorp-lightblue.png
   - assets/images/ecorp-lightgreen.png
   - assets/images/hulk.png
+  - assets/images/doctor.png
 
   fonts:
     - family: OpenSans

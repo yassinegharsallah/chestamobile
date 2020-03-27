@@ -56,7 +56,7 @@ class _ListeMedecinsState extends State<ListeMedecins> {
       for(int i=0 ; i<this.data.length;i++){
         print(this.data[i]["email"]);
         print(i);
-        items.add(new Medecin("assets/images/hulk.png", this.data[i]["nom"], this.data[i]["email"],this.data[i]["_id"]));
+        items.add(new Medecin("assets/images/doctor.png", this.data[i]["nom"], this.data[i]["email"],this.data[i]["_id"]));
       }
     });
 
