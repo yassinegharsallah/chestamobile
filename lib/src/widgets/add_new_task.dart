@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 import '../providers/task.dart';
 
 //Show a bottom sheet that allows the user to create or edit a task.
@@ -169,8 +171,36 @@ class _AddNewTaskState extends State<AddNewTask> {
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
-                onPressed: () {
+                onPressed: () async {
+                  print(' ########## ADDED SUIVIS ##########') ;
+                  print(' ########## ADDED SUIVIS ##########') ;
+                  print(' ########## ADDED SUIVIS ##########') ;
+                  print(' ########## ADDED SUIVIS ##########') ;
                   _validateForm();
+                  // LOGIN GET REQUEST IS HERE
+                  var url ='http://192.168.1.12:4000/user/AddSuivi';
+                  final prefs = await SharedPreferences.getInstance();
+                  var body = jsonEncode({
+                 //   'idpatient' : prefs.getString('idLoggedinUser'),
+                    "description" : "dshd58dfdfdfd",
+                    "dueDate":  DateFormat.yMMMd().format(_selectedDate).toString() ,
+                    "dueTime": _selectedTime.format(context).toString() });
+
+                  print("Body: " + body);
+
+                  http.post(url,
+                      headers: {"Content-Type": "application/json"},
+                      body: body
+                  ).then((http.Response response) async {
+                    print("Response status: ${response.statusCode}");
+                    print("Response body: ${response.body}");
+                    print(response.headers);
+                    print(response.request);
+                    //JSON DECODEER
+
+                  });
+                  // LOGIN GET REQUEST IS HERE
+
                 },
               ),
             ),
