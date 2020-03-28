@@ -11,7 +11,7 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TO DO LIST'),
+        title: Text('Suivi Quotidien'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -24,7 +24,7 @@ class Homepage extends StatelessWidget {
           ),
         ],
       ),
-      body: List(),
+      body: TasksList(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
