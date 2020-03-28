@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 //Everything the user adds to the list is a task.
 //Task provider is self explanatory and its job is being the provider for the project.
@@ -21,23 +24,43 @@ class Task {
 }
 
 class TaskProvider with ChangeNotifier {
+  List data;
   List<Task> get itemsList {
+    print('GET  DATA GET ');
+    getData().then((data){
+      for(int i=0 ; i<this.data.length;i++){
+        print(this.data[i]["_id"]);
+        print(i);
+        _toDoList.add(new Task( id: this.data[i]["_id"],
+          description: this.data[i]["description"],
+          dueDate:  DateTime.now(),
+          dueTime: TimeOfDay.now(),));
+      }
+    });
     return _toDoList;
   }
 
+  /* Fetching Data Into ListView */
+
+  Future<String> getData() async {
+    var response = await http.get(
+        Uri.encodeFull("http://192.168.1.12:4000/user/GetSuivi"),
+        headers: {
+          "Accept": "application/json"
+        }
+    );
+
+
+      this.data = json.decode(response.body);
+      print(response.body);
+
+    return "Success";
+  }
+
+  /* Fetching Data Into ListView */
+
   final List<Task> _toDoList = [
-    Task(
-      id: 'task#1',
-      description: 'Create my models',
-      dueDate: DateTime.now(),
-      dueTime: TimeOfDay.now(),
-    ),
-    Task(
-      id: 'task#2',
-      description: 'Add provider',
-      dueDate: DateTime.now(),
-      dueTime: TimeOfDay.now(),
-    ),
+
   ];
 
   Task getById(String id) {
