@@ -102,4 +102,8 @@ flutter:
         - asset: assets/fonts/Quicksand-SemiBold.ttf
           weight: 600
         - asset: assets/fonts/Quicksand-Bold.ttf
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-Bold.ttf
           weight: 700

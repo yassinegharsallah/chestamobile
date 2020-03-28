@@ -191,21 +191,21 @@ class LoginScreen extends StatelessWidget {
             prefs.setString('email', parsedBody['email']) ;
             prefs.setString('idLoggedinUser',parsedBody['_id']) ;
             /*save into shared pref*/
-             //redirection after login
-              if(parsedBody['email'] == 'med@gmail.com'){
-                print('Medecin');
-                Navigator.push(context, new MaterialPageRoute(
-                    builder: (context) =>
-                    new RendezVousMedecin(title: 'Rendez-Vous',))
-                );
-              }else{
-                print('Patient');
-                Navigator.push(context, new MaterialPageRoute(
-                    builder: (context) =>
-                    new ListeMedecins(title : 'Title'))
-                );
-              }
-             //redirection after login
+            //redirection after login
+            if(parsedBody['email'] == 'med@gmail.com'){
+              print('Medecin');
+              Navigator.push(context, new MaterialPageRoute(
+                  builder: (context) =>
+                  new RendezVousMedecin(title: 'Rendez-Vous',))
+              );
+            }else{
+              print('Patient');
+              Navigator.push(context, new MaterialPageRoute(
+                  builder: (context) =>
+                  new ListeMedecins(title : 'Title'))
+              );
+            }
+            //redirection after login
 
 
           }else{
@@ -235,7 +235,7 @@ class LoginScreen extends StatelessWidget {
       onRecoverPassword: (name) {
         print('Recover password info');
         print('Name: $name');
-      //  return _recoverPassword(name);
+        //  return _recoverPassword(name);
         // Show new password dialog
       },
       showDebugButtons: true,

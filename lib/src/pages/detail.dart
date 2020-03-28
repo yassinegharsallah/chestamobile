@@ -7,6 +7,7 @@ import 'ListeMedecins.dart';
 import 'package:http/http.dart' as http;
 
 import 'Reminder/full_page_analog_time_picker.dart';
+import 'TodoTask.dart';
 
 class MyDetailPage extends StatefulWidget {
   Medecin _Medc;
@@ -86,16 +87,29 @@ class _MyDetailPageState extends State<MyDetailPage> {
           onPressed: () =>   Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => FullPageAnalogTimePicker())),
+                  builder: (context) => ToDoListApp())),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          label: Text('Set Reminder',
+          label: Text('Suivi Hebdomodaire',
             style: TextStyle(color: Colors.white),),
-          icon: Icon(Icons.timer, color:Colors.white,),
+          icon: Icon(Icons.calendar_today, color:Colors.white,),
           textColor: Colors.white,
           splashColor: Colors.red,
           color: Colors.lightBlue,)
           ,
+          RaisedButton.icon(
+            onPressed: () =>   Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => FullPageAnalogTimePicker())),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            label: Text('Set Reminder',
+              style: TextStyle(color: Colors.white),),
+            icon: Icon(Icons.timer, color:Colors.white,),
+            textColor: Colors.white,
+            splashColor: Colors.red,
+            color: Colors.lightBlue,)
         ],
       )),
     );
