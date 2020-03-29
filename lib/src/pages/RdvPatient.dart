@@ -23,8 +23,8 @@ class RendezVous {
   final String body;
   final String idMedecin ;
   final String etat ;
-
-  RendezVous(this.img, this.title, this.body,this.idMedecin,this.etat);
+  final String idRendezVous ;
+  RendezVous(this.img, this.title, this.body,this.idMedecin,this.etat,this.idRendezVous);
 }
 class Patient {
   final String nom;
@@ -95,7 +95,7 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
             print('J VALUE :'); print(j);
           }
         });
-        items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"],this.data[i]["etat"]));
+        items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"],this.data[i]["etat"],this.data[i]["_id"]));
       }
     });
 
@@ -103,19 +103,52 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
 
     /* Fetching Data Into ListView */
   }
-
+  Future<void> _neverSatisfied(idRendezVous) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Rendez-Vous'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Voulez vous vraiment annuler ce rendez-vous ?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Annuler'),
+              onPressed: () async {
+               // Navigator.of(context).pop();
+                print('here'+idRendezVous) ;
+                await http.put(
+                    Uri.encodeFull("http://192.168.1.12:4000/user/UpdateRdvByID"),
+                    headers: {
+                      "Accept": "application/json",
+                      "token": idRendezVous,
+                      "etat": "annuler"
+                    }
+                );
+              },
+            ),
+            FlatButton(
+              child: Text('Exit'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
   Widget MedcCell(BuildContext ctx, int index) {
     return GestureDetector(
       onTap: () async {
-        final prefs = await SharedPreferences.getInstance();
-        final username = prefs.getString('username');
-        final email = prefs.getString('email');
-        final idLoggedInuser = prefs.getString('idLoggedinUser');
-        print('**************************** USER INFO *****************************');
-        print(username);
-        print(email) ;
-        print("id Logged in user : "+idLoggedInuser) ;
-        final snackBar = SnackBar(content: Text("Tap"));
+         print('NEVER SATISFIED NEVER');  print(this.items[index].idRendezVous);
+        _neverSatisfied(this.items[index].idRendezVous);
 
       },
       child: Card(
@@ -139,7 +172,7 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
                     ),
                   ],
                 ),
-                Icon(Icons.verified_user , color: this.items[index].etat =='confirmed'? Colors.green : Colors.blueAccent),
+                Icon(Icons.verified_user , color: this.items[index].etat =='confirmed'? Colors.green : Colors.redAccent),
               ],
             ),
           )),
