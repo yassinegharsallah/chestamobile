@@ -182,7 +182,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                   final prefs = await SharedPreferences.getInstance();
                   var body = jsonEncode({
                  //   'idpatient' : prefs.getString('idLoggedinUser'),
-                    "description" : "dshd58dfdfdfd",
+                    "description" : _inputDescription,
                     "dueDate":  DateFormat.yMMMd().format(_selectedDate).toString() ,
                     "dueTime": _selectedTime.format(context).toString() });
 
