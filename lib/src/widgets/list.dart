@@ -49,12 +49,12 @@ class _TasksListState extends State<TasksList> {
     print('GET  DATA GET ');
     getData().then((data){
       for(int i=0 ; i<this.data.length;i++){
-       // print(this.data[i]["email"]);
+        // print(this.data[i]["email"]);
         print(i);
         items.add(new Task(      id: 'task#1',
-          description: this.data[i]["description"],
-          dueDate: DateTime.now(),
-          dueTime: TimeOfDay.now()));
+            description: this.data[i]["details"],
+            dueDate: DateTime.now(),
+            dueTime: TimeOfDay.now()));
       }
     });
 
@@ -64,7 +64,7 @@ class _TasksListState extends State<TasksList> {
 
   @override
   Widget build(BuildContext context) {
- //   final taskList = Provider.of<TaskProvider>(context).itemsList;
+    //   final taskList = Provider.of<TaskProvider>(context).itemsList;
     return  this.items.length > 0
         ? ListView.builder(
       itemCount: this.items.length,
