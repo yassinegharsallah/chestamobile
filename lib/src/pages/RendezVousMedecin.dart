@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_login/src/CoronaDashboard/main.dart';
+import 'package:flutter_login/src/pages/MedecinPatients.dart';
 import 'package:http/http.dart' as http;
 import 'DetailRdv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,46 +35,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
   List data;
   List Patients ;
 
-//bottom navigation
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    )
-  ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      switch(_selectedIndex){
-        case 0:
-          break ;
-        case 1:
-          print('DAHSBOARD TAPPED');
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => CoronaDashboard() ));
-          break;
-      }
-    });
-  }
-
-//bottom navigation
 
 
   _RendezVousMedecinState() {
@@ -194,43 +156,54 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Drawer Demo'),
       ),
-      body: Center(
-        child: Stack(
-          children: <Widget>[
-            ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) => MedcCell(context, index),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: const <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
             ),
+
+            ListTile(
+              leading: Icon(Icons.message),
+              title: Text('Messages'),
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Profile'),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+            ),
+
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today,color:Colors.deepPurple),
-            title: Text('Rdv', style: TextStyle(color: Colors.amber)),
+        body: Center(
+          child: Stack(
+            children: <Widget>[
+              ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) => MedcCell(context, index),
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard,color:Colors.deepPurple),
-            title: Text('Dashboard', style: TextStyle(color: Colors.amber)),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.supervised_user_circle,color:Colors.deepPurple),
-            title: Text('Patients', style: TextStyle(color: Colors.amber)),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.forum,color:Colors.deepPurple),
-            title: Text('Forum', style: TextStyle(color: Colors.amber)),
-          )
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),
-
+        )
     );
+
+
   }
 
 }
