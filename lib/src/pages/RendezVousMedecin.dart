@@ -161,7 +161,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
-          children: const <Widget>[
+          children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
@@ -176,20 +176,30 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
             ),
 
             ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Messages'),
+              leading: Icon(Icons.description),
+              title: Text('Mes Rendez-vous'),
             ),
             ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Profile'),
+              leading: Icon(Icons.calendar_today),
+              title: Text('Calendrier'),
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: Icon(Icons.forum),
+              title: Text('Forum'),
             ),
 
+            ListTile(
+              leading: Icon(Icons.supervised_user_circle),
+              title: Text('Mes Patients'),
+                onTap: ()=> {
+                    Navigator.push(
+                context,
+                MaterialPageRoute(
+                builder: (context) => MedecinPatients()))
+            }),
           ],
         ),
+
       ),
         body: Center(
           child: Stack(
