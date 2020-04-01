@@ -1,16 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_login/home_page.dart';
-import 'package:flutter_login/src/pages/home_page.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_login/src/models/User.dart';
-import 'DetailRdv.dart';
-import 'detail.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:flutter_login/src/CoronaDashboard/main.dart';
+import 'package:http/http.dart' as http;
+import 'DetailRdv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class RendezVousMedecin extends StatefulWidget {
   RendezVousMedecin({Key key, this.title}) : super(key: key);
   final String title;
@@ -55,15 +50,31 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
       'Index 2: School',
       style: optionStyle,
     ),
+    Text(
+      'Index 2: School',
+      style: optionStyle,
+    )
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      switch(_selectedIndex){
+        case 0:
+          break ;
+        case 1:
+          print('DAHSBOARD TAPPED');
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CoronaDashboard() ));
+          break;
+      }
     });
   }
 
 //bottom navigation
+
 
   _RendezVousMedecinState() {
     /* Fetching Data Into ListView */
@@ -168,11 +179,11 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
                     Text(
                       Patientsitems[index].nom+' '+Patientsitems[index].prenom,
                       style:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
-                Icon(Icons.navigate_next, color: Colors.black38),
+                Icon(Icons.navigate_next, color: Colors.amber[800]),
               ],
             ),
           )),
@@ -198,22 +209,27 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
+            icon: Icon(Icons.calendar_today,color:Colors.deepPurple),
+            title: Text('Rdv', style: TextStyle(color: Colors.amber)),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Business'),
+            icon: Icon(Icons.dashboard,color:Colors.deepPurple),
+            title: Text('Dashboard', style: TextStyle(color: Colors.amber)),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('School'),
+            icon: Icon(Icons.supervised_user_circle,color:Colors.deepPurple),
+            title: Text('Patients', style: TextStyle(color: Colors.amber)),
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.forum,color:Colors.deepPurple),
+            title: Text('Forum', style: TextStyle(color: Colors.amber)),
+          )
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
+
     );
   }
 
