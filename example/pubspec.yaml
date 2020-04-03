@@ -53,6 +53,7 @@ flutter:
   - assets/images/hulk.png
   - assets/images/doctor.png
   - assets/images/waiting.png
+  - assets/images/patient.png
 
   fonts:
     - family: OpenSans

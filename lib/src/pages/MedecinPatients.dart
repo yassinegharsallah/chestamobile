@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_login/src/pages/AccessPatient.dart';
+import 'package:flutter_login/src/pages/SuivrePatient.dart';
 
 class MedecinPatients extends StatefulWidget {
   MedecinPatients({Key key}) : super(key: key);
@@ -40,7 +40,10 @@ class _MedecinPatientsState extends State<MedecinPatients> {
               ),
               RaisedButton(
                 child: Text("Suivre Patients"),
-                onPressed: () => print('ff'),
+                onPressed: () =>  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SuivrePatient() )),
                 color: Colors.deepPurple,
                 textColor: Colors.white,
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),

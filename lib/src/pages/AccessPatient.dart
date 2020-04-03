@@ -62,20 +62,21 @@ class _AccessPatientState extends State<AccessPatient> {
       floatingActionButton: FloatingActionButton(
         // When the user presses the button, show an alert dialog containing
         // the text that the user has entered into the text field.
-        onPressed: () {
+        onPressed: () async {
           Future<String> result =  SetPatientData();
-          print('###########');
+          final prefs = await SharedPreferences.getInstance();
           String rs = 'dfdf';
           result.then((value) =>
-              rs = value
+            print('EL RESULTAT MEL AWAIT '+value)
           ) ;
+
           return showDialog(
             context: context,
             builder: (context) {
               return AlertDialog(
                 // Retrieve the text the that user has entered by using the
                 // TextEditingController.
-                content: Text(rs),
+                content: Text(prefs.getString('response')),
               );
             },
           );
@@ -98,6 +99,7 @@ class _AccessPatientState extends State<AccessPatient> {
      );
      print('PATIENTS EXECUTION');
      data = json.decode(response.body);
+     print(data[0]['email']);
      if(data[0]['email'] != ''){
        print('patient existant');
        var url ='http://192.168.1.12:4000/user/AddAccessPatientMedecin';

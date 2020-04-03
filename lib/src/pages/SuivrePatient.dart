@@ -1,20 +1,16 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_login/src/CoronaDashboard/main.dart';
 import 'package:flutter_login/src/pages/MedecinPatients.dart';
-import 'package:flutter_login/src/pages/SuivrePatient.dart';
 import 'package:http/http.dart' as http;
-import 'DetailRdv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class RendezVousMedecin extends StatefulWidget {
-  RendezVousMedecin({Key key, this.title}) : super(key: key);
+class SuivrePatient extends StatefulWidget {
+  SuivrePatient({Key key, this.title}) : super(key: key);
   final String title;
 
 
   @override
-  _RendezVousMedecinState createState() => _RendezVousMedecinState();
+  _SuivrePatientState createState() => _SuivrePatientState();
 }
 
 class RendezVous {
@@ -30,7 +26,7 @@ class Patient {
   final String prenom;
   Patient(this.nom, this.prenom);
 }
-class _RendezVousMedecinState extends State<RendezVousMedecin> {
+class _SuivrePatientState extends State<SuivrePatient> {
   List<RendezVous> items = new List<RendezVous>();
   List<Patient> Patientsitems = new List<Patient>();
   List data;
@@ -39,17 +35,17 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
 
 
 
-  _RendezVousMedecinState() {
+  _SuivrePatientState() {
     /* Fetching Data Into ListView */
 
     Future<String> getData() async {
-//      final prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvMedecin"),
+          Uri.encodeFull("http://192.168.1.12:4000/user/GetAccessedPatients"),
           headers: {
             "Accept": "application/json",
-            "token" : "5e73d3e073761a37a036ce3a"
+            "idmedecin" : prefs.getString('idLoggedinUser')
           }
       );
 
@@ -73,7 +69,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
             "token" : idpatient
           }
       );
-      print('PATIENTS EXECUTION');
+     // print('PATIENTS EXECUTION');
       this.setState(() {
 
         this.Patients = json.decode(response.body);
@@ -84,19 +80,18 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
     }
 //Get Patient Data
 
-    print('GET  DATA GET ');
     getData().then((data) async {
       for(int i=0 ; i<this.data.length;i++){
-      //  print(this.data[i]["email"]);
-        print(i); print('nfetchi fel patient');
+        print('ID PATIENT : '+this.data[i]["idpatient"]);
+        print('ETAT : '+this.data[i]["etat"]);
         getPatientData(this.data[i]["idpatient"]).then((data) async {
           for(int j=0 ; j<this.data.length;j++){
-            print(this.Patients[j]['email']);
+     //       print(this.Patients[j]['email']);
             Patientsitems.add(new Patient(this.Patients[j]['nom'],this.Patients[j]['prenom']));
-            print('J VALUE :'); print(j);
+         //   print('J VALUE :'); print(j);
           }
         });
-        items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"]));
+        items.add(new RendezVous("assets/images/patient.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"]));
       }
     });
 
@@ -112,15 +107,15 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
         final username = prefs.getString('username');
         final email = prefs.getString('email');
         final idLoggedInuser = prefs.getString('idLoggedinUser');
-        print('**************************** USER INFO *****************************');
-        print(username);
-        print(email) ;
-        print("id Logged in user : "+idLoggedInuser) ;
+      //  print('**************************** USER INFO *****************************');
+   //     print(username);
+   //     print(email) ;
+   //     print("id Logged in user : "+idLoggedInuser) ;
         final snackBar = SnackBar(content: Text("Tap"));
-        Navigator.push(
+  /*      Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DetailRendezVousMedecin(data[index]["_id"])));
+                builder: (context) => DetailSuivrePatient(data[index]["_id"])));*/
       },
       child: Card(
           margin: EdgeInsets.all(8),
@@ -142,11 +137,11 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
                     Text(
                       Patientsitems[index].nom+' '+Patientsitems[index].prenom,
                       style:
-                      TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
                     ),
                   ],
                 ),
-                Icon(Icons.navigate_next, color: Colors.amber[800]),
+                Icon(Icons.comment, color: Colors.deepPurple),
               ],
             ),
           )),
@@ -156,52 +151,52 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Drawer Demo'),
-      ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+        appBar: AppBar(
+          title: const Text('Mes Patients'),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text(
+                  'Drawer Header',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
                 ),
               ),
-            ),
 
-            ListTile(
-              leading: Icon(Icons.description),
-              title: Text('Mes Rendez-vous'),
-            ),
-            ListTile(
-              leading: Icon(Icons.calendar_today),
-              title: Text('Calendrier'),
-            ),
-            ListTile(
-              leading: Icon(Icons.forum),
-              title: Text('Forum'),
-            ),
+              ListTile(
+                leading: Icon(Icons.description),
+                title: Text('Mes Rendez-vous'),
+              ),
+              ListTile(
+                leading: Icon(Icons.calendar_today),
+                title: Text('Calendrier'),
+              ),
+              ListTile(
+                leading: Icon(Icons.forum),
+                title: Text('Forum'),
+              ),
 
-            ListTile(
-              leading: Icon(Icons.supervised_user_circle),
-              title: Text('Mes Patients'),
-                onTap: ()=> {
+              ListTile(
+                  leading: Icon(Icons.supervised_user_circle),
+                  title: Text('Mes Patients'),
+                  onTap: ()=> {
                     Navigator.push(
-                context,
-                MaterialPageRoute(
-                builder: (context) => MedecinPatients()))
-            }),
-          ],
-        ),
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MedecinPatients()))
+                  }),
+            ],
+          ),
 
-      ),
+        ),
         body: Center(
           child: Stack(
             children: <Widget>[
