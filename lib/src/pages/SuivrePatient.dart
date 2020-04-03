@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login/src/pages/MedecinPatients.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutter_login/src/pages/DetailSuiviMedecin.dart';
 class SuivrePatient extends StatefulWidget {
   SuivrePatient({Key key, this.title}) : super(key: key);
   final String title;
@@ -112,10 +112,10 @@ class _SuivrePatientState extends State<SuivrePatient> {
    //     print(email) ;
    //     print("id Logged in user : "+idLoggedInuser) ;
         final snackBar = SnackBar(content: Text("Tap"));
-  /*      Navigator.push(
+        Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DetailSuivrePatient(data[index]["_id"])));*/
+                builder: (context) => DetailSuiviMedecins(data[index]["_id"])));
       },
       child: Card(
           margin: EdgeInsets.all(8),
@@ -141,7 +141,7 @@ class _SuivrePatientState extends State<SuivrePatient> {
                     ),
                   ],
                 ),
-                Icon(Icons.comment, color: Colors.deepPurple),
+                Icon(Icons.navigate_next, color: Colors.deepPurple),
               ],
             ),
           )),
