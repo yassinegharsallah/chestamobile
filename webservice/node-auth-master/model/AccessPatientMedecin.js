@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const RendezvousSchema = mongoose.Schema({
+const AccessPatientMedecinSchema = mongoose.Schema({
     idpatient: {
         type: String
     },
@@ -14,8 +14,8 @@ const RendezvousSchema = mongoose.Schema({
         type: Date
     }
 },{
-    collection: 'Rendezvous'
+    collection: 'AccessPatientMedecin'
 });
 
 // export model user with UserSchema
-module.exports = mongoose.model("Rendezvous", RendezvousSchema);
+module.exports = mongoose.model("AccessPatientMedecin", AccessPatientMedecinSchema);

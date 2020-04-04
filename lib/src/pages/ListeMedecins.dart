@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:flutter_login/src/pages/InvitationPatient.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_login/src/models/User.dart';
@@ -117,6 +117,64 @@ class _ListeMedecinsState extends State<ListeMedecins> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            ListTile(
+                leading: Icon(Icons.camera_alt),
+                title: Text('Liste Medecins'),
+                onTap: ()=> {
+            /*      Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CoronaDashboard()))*/
+                }
+            ),
+            ListTile(
+              leading: Icon(Icons.description),
+              title: Text('Mes Rendez Vous'),
+            ),
+            ListTile(
+              leading: Icon(Icons.calendar_today),
+              title: Text('Suivis Hebdomadaire'),
+            ),
+            ListTile(
+              leading: Icon(Icons.forum),
+              title: Text('Invitations'),
+                onTap: ()=>
+                {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => InvitationMedecinPatient()))
+                } ),
+
+            ListTile(
+                leading: Icon(Icons.supervised_user_circle),
+                title: Text('Historique'),
+                onTap: ()=> {
+         /*         Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MedecinPatients()))*/
+                }),
+          ],
+        ),
+
       ),
       body: Center(
         child: Stack(

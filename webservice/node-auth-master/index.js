@@ -15,8 +15,11 @@ const PORT = process.env.PORT || 4000;
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+var cors = require('cors'); // We will use CORS to enable cross origin domain requests.
 
-app.get("/", (req, res) => {
+
+app.use(cors())
+app.get("/", cors() , (req, res) => {
   res.json({ message: "API Working" });
 });
 
