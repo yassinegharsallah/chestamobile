@@ -29,7 +29,7 @@ class Medecin {
 class _DetailSuiviMedecinsState extends State<DetailSuiviMedecins> {
   List<Medecin> items = new List<Medecin>();
   List data;
-
+  TextEditingController  _textFieldController ;
 
   _DetailSuiviMedecinsState(token) {
     /* Fetching Data Into ListView */
@@ -65,19 +65,42 @@ class _DetailSuiviMedecinsState extends State<DetailSuiviMedecins> {
 
     /* Fetching Data Into ListView */
   }
+  ////////////// SHOW DIALOG ///////////////////
+  _displayDialog(BuildContext context, idsuivi) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('TextField in Dialog'),
+            content: TextField(
+              controller: _textFieldController,
+              decoration: InputDecoration(hintText: "Ajouter Conseil"),
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text('Ajouter Conseil'),
+                onPressed: () async {
+                  print('TEST TEST');
+                  await http.put(
+                      Uri.encodeFull("http://192.168.1.12:4000/user/UpdateSuiviRemarque"),
+                      headers: {
+                        "Accept": "application/json",
+                        "token": '5e80a3bdb0704a72b86626be',
+                        "remarque": _textFieldController.text
+                      }
+                  ) ;                },
+              )
+            ],
+          );
+        });
+  }
+
+  //////////// SHOW DIALOG /////////////////////
 
   Widget MedcCell(BuildContext ctx, int index) {
     return GestureDetector(
       onTap: () async {
-        final prefs = await SharedPreferences.getInstance();
-        final username = prefs.getString('username');
-        final email = prefs.getString('email');
-        final idLoggedInuser = prefs.getString('idLoggedinUser');
-        final snackBar = SnackBar(content: Text("Tap"));
-      /*  Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MyDetailPage(items[index]))); */
+        _displayDialog(ctx,items[index].idMedecin) ;
       },
       child: Card(
           margin: EdgeInsets.all(8),
@@ -109,6 +132,9 @@ class _DetailSuiviMedecinsState extends State<DetailSuiviMedecins> {
           )),
     );
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {

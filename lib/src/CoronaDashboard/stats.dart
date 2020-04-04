@@ -76,7 +76,7 @@ class _StatsPage extends State<StatsPage>
               LinearCases(CaseType.sick.index, totalCount.sick,
                   totalCount.sickRate.toInt(), "Sick"),
               LinearCases(CaseType.deaths.index, totalCount.deaths,
-                  totalCount.fatalityRate.toInt(), "Deaths"),
+                  totalCount.fatalityRate.toInt(), "Urgent"),
               LinearCases(CaseType.recovered.index, totalCount.recovered,
                   totalCount.recoveryRate.toInt(), "Recovered")
             ];
@@ -211,7 +211,7 @@ class _StatsPage extends State<StatsPage>
                                           .headline
                                           .apply(color: Colors.red),
                                     ),
-                                    Text("Deaths")
+                                    Text("Emergency")
                                   ],
                                 ),
                                 Column(
@@ -268,7 +268,7 @@ class _StatsPage extends State<StatsPage>
                   chinaCase.coronaTotalCount),
               OrdinalCases("Recovered", chinaCase.totalRecoveredCount,
                   chinaCase.coronaTotalCount),
-              OrdinalCases("Deaths", chinaCase.totalDeathsCount,
+              OrdinalCases("Emergency", chinaCase.totalDeathsCount,
                   chinaCase.coronaTotalCount),
             ];
 
@@ -359,7 +359,7 @@ class _StatsPage extends State<StatsPage>
 
           var seriesList = [
             charts.Series<OrdinalCases, String>(
-              id: 'Deaths',
+              id: 'Emergency',
               domainFn: (OrdinalCases cases, _) => cases.country,
               measureFn: (OrdinalCases cases, _) => cases.total,
               data: deathsCasesData,

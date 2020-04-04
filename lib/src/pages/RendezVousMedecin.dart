@@ -157,7 +157,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Drawer Demo'),
+        title: const Text('CHESTA'),
       ),
       drawer: Drawer(
         child: ListView(
@@ -175,7 +175,16 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
                 ),
               ),
             ),
-
+            ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text('Detection Dashboard'),
+                onTap: ()=> {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CoronaDashboard()))
+                }
+            ),
             ListTile(
               leading: Icon(Icons.description),
               title: Text('Mes Rendez-vous'),
