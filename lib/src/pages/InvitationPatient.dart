@@ -106,7 +106,7 @@ class _InvitationMedecinPatientState extends State<InvitationMedecinPatient> {
 
   //// DIALOG ////
 
-  Future<void> _ackAlert(BuildContext context) {
+  Future<void> _ackAlert(BuildContext context,idAccess) {
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
@@ -116,7 +116,14 @@ class _InvitationMedecinPatientState extends State<InvitationMedecinPatient> {
           actions: <Widget>[
             FlatButton(
               child: Text('Ok'),
-              onPressed: () {
+              onPressed: () async {
+                await http.put(
+                    Uri.encodeFull("http://192.168.1.12:4000/user/AccepterInvitation"),
+                    headers: {
+                      "Accept": "application/json",
+                      "token": idAccess,
+                    }
+                ) ;
                 Navigator.of(context).pop();
               },
             ),
@@ -137,10 +144,7 @@ class _InvitationMedecinPatientState extends State<InvitationMedecinPatient> {
         final idLoggedInuser = prefs.getString('idLoggedinUser');
 
         final snackBar = SnackBar(content: Text("Tap"));
-      /*  Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => DetailInvitationMedecinPatient(data[index]["_id"])));*/
+          _ackAlert(ctx, items[index].idMedecin) ;
       },
       child: Card(
           margin: EdgeInsets.all(8),
