@@ -5,7 +5,6 @@ import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'ListeMedecins.dart';
 import 'package:http/http.dart' as http;
-
 import 'RdvPatient.dart';
 import 'Reminder/full_page_analog_time_picker.dart';
 import 'TodoTask.dart';
@@ -91,7 +90,7 @@ class _MyDetailPageState extends State<MyDetailPage> {
                   builder: (context) => ToDoListApp())),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          label: Text('Suivi Hebdomodaire',
+          label: Text(' Suivi Hebdomodaire',
             style: TextStyle(color: Colors.white),),
           icon: Icon(Icons.calendar_today, color:Colors.white,),
           textColor: Colors.white,

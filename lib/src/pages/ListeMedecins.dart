@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'package:flutter_login/src/pages/InvitationPatient.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_login/src/models/User.dart';
 import 'detail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'TodoTask.dart';
+import 'RdvPatient.dart';
+import 'package:flutter_login/src/pages/ChestaDoctor/ChestaDoctor.dart' ;
 
 class ListeMedecins extends StatefulWidget {
   ListeMedecins({Key key, this.title}) : super(key: key);
@@ -99,9 +101,9 @@ class _ListeMedecinsState extends State<ListeMedecins> {
                       width: 16,
                     ),
                     Text(
-                      items[index].title,
+                     'Dr ' + items[index].title,
                       style:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
                     ),
                   ],
                 ),
@@ -116,7 +118,7 @@ class _ListeMedecinsState extends State<ListeMedecins> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Medecins'),
       ),
       drawer: Drawer(
         child: ListView(
@@ -124,10 +126,10 @@ class _ListeMedecinsState extends State<ListeMedecins> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.deepPurple,
               ),
               child: Text(
-                'Drawer Header',
+                'CHESTA MOBILE',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -135,8 +137,8 @@ class _ListeMedecinsState extends State<ListeMedecins> {
               ),
             ),
             ListTile(
-                leading: Icon(Icons.camera_alt),
-                title: Text('Liste Medecins'),
+                leading: Icon(Icons.assignment_ind),
+                title: Text('Visiter Medecins'),
                 onTap: ()=> {
             /*      Navigator.push(
                       context,
@@ -147,11 +149,23 @@ class _ListeMedecinsState extends State<ListeMedecins> {
             ListTile(
               leading: Icon(Icons.description),
               title: Text('Mes Rendez Vous'),
+                onTap: ()=>
+                {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RendezVousPatient(title: 'Rendez-Vous',)))
+                }
             ),
             ListTile(
               leading: Icon(Icons.calendar_today),
               title: Text('Suivis Hebdomadaire'),
-            ),
+                onTap: ()=>
+                { Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ToDoListApp()))
+                }),
             ListTile(
               leading: Icon(Icons.forum),
               title: Text('Invitations'),
@@ -164,7 +178,7 @@ class _ListeMedecinsState extends State<ListeMedecins> {
                 } ),
 
             ListTile(
-                leading: Icon(Icons.supervised_user_circle),
+                leading: Icon(Icons.history),
                 title: Text('Historique'),
                 onTap: ()=> {
          /*         Navigator.push(
@@ -172,6 +186,15 @@ class _ListeMedecinsState extends State<ListeMedecins> {
                       MaterialPageRoute(
                           builder: (context) => MedecinPatients()))*/
                 }),
+            ListTile(
+                leading: Icon(Icons.streetview),
+                title: Text('Chesta Doctor'),
+                onTap: ()=> {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ChestaDoctor()))
+                })
           ],
         ),
 
