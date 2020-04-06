@@ -5,12 +5,12 @@ class QuizBrain{
   int _questionNumber = 0;
 
   List<Question> _questionBank = [
-    Question('Some cats are actually allergic to humans', true),
-    Question('You can lead a cow down stairs but not up stairs.', false),
-    Question('Approximately one quarter of human bones are in the feet.', true),
-    Question('A slug\'s blood is green.', true),
-    Question('Buzz Aldrin\'s mother\'s maiden name was \"Moon\".', true),
-    Question('It is illegal to pee in the Ocean in Portugal.', true),
+    Question('Votre temperature est plus de 38 ?', true),
+    Question('Vous avez u mal ou poumons ?', false),
+    Question('etes vous fumeur ?', true),
+    Question('avez des problemes de respiration.', true),
+    Question('etes vous plus que 65 ans ?', true),
+    Question('avez vous des problemes cardiques ? ', true),
     Question(
         'No piece of square dry paper can be folded in half more than 7 times.',
         false),

@@ -299,7 +299,7 @@ class _StatsPage extends State<StatsPage>
                 padding: EdgeInsets.only(top: 8),
               ),
               Text(
-                "Cases in Mainland China",
+                "Cases You Diagnosed",
                 style: Theme.of(context).textTheme.headline,
               ),
               Container(
@@ -398,7 +398,7 @@ class _StatsPage extends State<StatsPage>
               padding: EdgeInsets.only(top: 16),
             ),
             Text(
-              "Cases outside Mainland China",
+              "Cases in Tunisia",
               style: Theme.of(context).textTheme.headline,
             ),
             Container(

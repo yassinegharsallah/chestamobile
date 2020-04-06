@@ -131,9 +131,27 @@ class SectionCardWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                title: Text(title),
+                title: Text('Camera Position'),
                 subtitle: Padding(
-                    padding: EdgeInsets.only(top: 8), child: Text(description)),
+                    padding: EdgeInsets.only(top: 8), child: Text('If you want to take pictures that have a “wow” factor built in them, the Rule of Thirds is the composition secret you need to take advantage of!')),
+              ),
+
+              ListTile(
+                title: Text('Avoid Camera Shake'),
+                subtitle: Padding(
+                    padding: EdgeInsets.only(top: 8), child: Text('First, you need to learn how to hold your camera correctly; use both hands, one around the body and one around the lens and hold the camera close to your body for support.')),
+              ),
+
+              ListTile(
+                title: Text('Learn to use the Exposure Triangle'),
+                subtitle: Padding(
+                    padding: EdgeInsets.only(top: 8), child: Text('You also need to understand the relationships between these three controls. When you adjust one of them, you would usually have to consider at least one of the others, to get the desired results.')),
+              ),
+
+              ListTile(
+                title: Text('Use a Polarizing Filter'),
+                subtitle: Padding(
+                    padding: EdgeInsets.only(top: 8), child: Text('The recommended type of polarizer is circular because these allow your camera to use TTL (through the lens) metering such as auto exposure.')),
               ),
             ],
           ),

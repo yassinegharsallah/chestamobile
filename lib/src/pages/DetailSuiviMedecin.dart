@@ -122,7 +122,7 @@ class _DetailSuiviMedecinsState extends State<DetailSuiviMedecins> {
                     Text(
                       items[index].title,
                       style:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
                     ),
                   ],
                 ),

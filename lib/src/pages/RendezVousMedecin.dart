@@ -96,7 +96,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
             print('J VALUE :'); print(j);
           }
         });
-        items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"]));
+        items.add(new RendezVous("assets/images/patient.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"]));
       }
     });
 
@@ -165,10 +165,10 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.deepPurple,
               ),
               child: Text(
-                'Drawer Header',
+                'CHESTA MOBILE',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,

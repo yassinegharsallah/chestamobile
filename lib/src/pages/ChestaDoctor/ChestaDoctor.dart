@@ -110,7 +110,7 @@ class _QuizPageState extends State<QuizPage> {
 //                    ),
 //                  );
              int  x = quizBrain.nextQuestion();
-             if(x == 3){
+             if(x == 4){
                print('TRUE CONDITION');
                Navigator.push(
                    context,

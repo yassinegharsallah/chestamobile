@@ -43,7 +43,7 @@ class MapScreenState extends State<Resultat>
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(left: 25.0),
-                                  child: new Text('Add Patient',
+                                  child: new Text('Resultat Diagnostic',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20.0,
@@ -66,7 +66,7 @@ class MapScreenState extends State<Resultat>
                                       shape: BoxShape.circle,
                                       image: new DecorationImage(
                                         image: new ExactAssetImage(
-                                            'assets/images/as.png'),
+                                            'assets/images/dcotor.png'),
                                         fit: BoxFit.cover,
                                       ),
                                     )),
@@ -78,7 +78,7 @@ class MapScreenState extends State<Resultat>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     new CircleAvatar(
-                                      backgroundColor: Colors.red,
+                                      backgroundColor: Colors.deepPurple,
                                       radius: 25.0,
                                       child: new Icon(
                                         Icons.camera_alt,
@@ -112,7 +112,7 @@ class MapScreenState extends State<Resultat>
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       new Text(
-                                        'Medical Informations',
+                                        'Lungs Status :',
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.bold),
@@ -139,10 +139,10 @@ class MapScreenState extends State<Resultat>
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       new Text(
-                                        'Name',
+                                        'Propable infection',
                                         style: TextStyle(
                                             fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.normal),
                                       ),
                                     ],
                                   ),
@@ -153,18 +153,7 @@ class MapScreenState extends State<Resultat>
                                   left: 25.0, right: 25.0, top: 2.0),
                               child: new Row(
                                 mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  new Flexible(
-                                    child: new TextField(
-                                      decoration: const InputDecoration(
-                                        hintText: "",
-                                      ),
-                                      enabled: !_status,
-                                      autofocus: !_status,
 
-                                    ),
-                                  ),
-                                ],
                               )),
                           Padding(
                               padding: EdgeInsets.only(
@@ -191,15 +180,6 @@ class MapScreenState extends State<Resultat>
                                   left: 25.0, right: 25.0, top: 2.0),
                               child: new Row(
                                 mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  new Flexible(
-                                    child: new TextField(
-                                      decoration: const InputDecoration(
-                                          hintText: "Diseases & Symptoms"),
-                                      enabled: !_status,
-                                    ),
-                                  ),
-                                ],
                               )),
                           Padding(
                               padding: EdgeInsets.only(
@@ -212,11 +192,17 @@ class MapScreenState extends State<Resultat>
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       new Text(
-                                        'Age',
+                                        'Pneumonia Rate :',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold),
                                       ),
+                                      new Text(
+                                        '68.3%',
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.normal),
+                                      )
                                     ],
                                   ),
                                 ],
@@ -226,15 +212,7 @@ class MapScreenState extends State<Resultat>
                                   left: 25.0, right: 25.0, top: 2.0),
                               child: new Row(
                                 mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  new Flexible(
-                                    child: new TextField(
-                                      decoration: const InputDecoration(
-                                          hintText: "Weight"),
-                                      enabled: !_status,
-                                    ),
-                                  ),
-                                ],
+
                               )),
                           Padding(
                               padding: EdgeInsets.only(
@@ -246,7 +224,7 @@ class MapScreenState extends State<Resultat>
                                   Expanded(
                                     child: Container(
                                       child: new Text(
-                                        'Pin Code',
+                                        'Final Result : ',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold),
@@ -257,10 +235,10 @@ class MapScreenState extends State<Resultat>
                                   Expanded(
                                     child: Container(
                                       child: new Text(
-                                        'Pneumonia Status',
+                                        'Propable Pneumonia Case',
                                         style: TextStyle(
                                             fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.normal),
                                       ),
                                     ),
                                     flex: 2,
@@ -273,27 +251,7 @@ class MapScreenState extends State<Resultat>
                               child: new Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Flexible(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(right: 10.0),
-                                      child: new TextField(
-                                        decoration: const InputDecoration(
-                                            hintText: "Enter Pin Code"),
-                                        enabled: !_status,
-                                      ),
-                                    ),
-                                    flex: 2,
-                                  ),
-                                  Flexible(
-                                    child: new TextField(
-                                      decoration: const InputDecoration(
-                                          hintText: "Enter State"),
-                                      enabled: !_status,
-                                    ),
-                                    flex: 2,
-                                  ),
-                                ],
+
                               )),
                           !_status ? _getActionButtons() : new Container(),
                         ],
@@ -346,7 +304,7 @@ class MapScreenState extends State<Resultat>
               padding: EdgeInsets.only(left: 10.0),
               child: Container(
                   child: new RaisedButton(
-                    child: new Text("Cancel"),
+                    child: new Text("visit doctor"),
                     textColor: Colors.white,
                     color: Colors.red,
                     onPressed: () {

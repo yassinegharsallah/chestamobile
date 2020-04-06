@@ -11,7 +11,7 @@ class CoronaDashboard extends StatelessWidget {
     return MaterialApp(
       title: 'Pneumonia Tracker',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: Colors.deepPurple,
       ),
       home: DefaultTabController(
         length: 4,

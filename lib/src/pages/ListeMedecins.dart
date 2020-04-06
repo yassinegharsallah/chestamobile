@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_login/src/pages/History.dart';
 import 'package:flutter_login/src/pages/InvitationPatient.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -181,10 +182,10 @@ class _ListeMedecinsState extends State<ListeMedecins> {
                 leading: Icon(Icons.history),
                 title: Text('Historique'),
                 onTap: ()=> {
-         /*         Navigator.push(
+                Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => MedecinPatients()))*/
+                          builder: (context) => History()))
                 }),
             ListTile(
                 leading: Icon(Icons.streetview),
