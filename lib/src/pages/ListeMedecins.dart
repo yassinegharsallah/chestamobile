@@ -53,6 +53,7 @@ class _ListeMedecinsState extends State<ListeMedecins> {
       return "Success";
     }
 
+
    // await getData()  ;  // <--- your code needs to pause until the Future returns.
     print('GET  DATA GET ');
     getData().then((data){
@@ -67,6 +68,37 @@ class _ListeMedecinsState extends State<ListeMedecins> {
     /* Fetching Data Into ListView */
   }
 
+  Future<String>  getSearchData(nomMedecin) async {
+    var response = await http.get(
+        Uri.encodeFull("http://192.168.1.12:4000/user/GetMedecinByNom"),
+        headers: {
+          "Accept": "application/json",
+          "token": nomMedecin
+        }
+    );
+
+    this.setState(() {
+
+      this.data = json.decode(response.body);
+    });
+print(data);
+
+    return "Success";
+  }
+
+  void filterSearchResults(String query) {
+   print('Searched Query is '+query);
+  getSearchData(query).then((data){
+     for(int i=0 ; i<this.data.length;i++){
+       print('searched results');
+       print(this.data[i]["email"]);
+       items.add(new Medecin("assets/images/doctor.png", this.data[i]["nom"], this.data[i]["email"],this.data[i]["_id"]));
+     }
+   });
+
+  }
+
+
   Widget MedcCell(BuildContext ctx, int index) {
     return GestureDetector(
       onTap: () async {
@@ -74,7 +106,6 @@ class _ListeMedecinsState extends State<ListeMedecins> {
         final username = prefs.getString('username');
         final email = prefs.getString('email');
         final idLoggedInuser = prefs.getString('idLoggedinUser');
-        print('******************************************************************************');
         print(username);
         print(email) ;
         print("id Logged in user : "+idLoggedInuser) ;
@@ -119,7 +150,7 @@ class _ListeMedecinsState extends State<ListeMedecins> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Medecins'),
+        title: Text('Medecins')
       ),
       drawer: Drawer(
         child: ListView(
@@ -200,17 +231,37 @@ class _ListeMedecinsState extends State<ListeMedecins> {
         ),
 
       ),
-      body: Center(
-        child: Stack(
+      body: Container(
+        child: Column(
           children: <Widget>[
-            ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (context, index) => MedcCell(context, index),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                onChanged: (value) {
+                 filterSearchResults(value);
+                },
+               // controller: editingController,
+                decoration: InputDecoration(
+                    labelText: "Search",
+                    hintText: "Search",
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+              ),
             ),
-          ],
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: items.length,
+                itemBuilder: ((context, index) => MedcCell(context, index)
+              ),
+            ),
+            )],
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
+  } // This trailing comma makes auto-formatting nicer for build methods.
+
   }
 
-}
+

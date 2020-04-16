@@ -192,7 +192,7 @@ class LoginScreen extends StatelessWidget {
             prefs.setString('idLoggedinUser',parsedBody['_id']) ;
             /*save into shared pref*/
             //redirection after login
-            if(parsedBody['email'] == 'med@gmail.com'){
+            if(parsedBody['type'] == 'medecin'){
               print('Medecin');
               Navigator.push(context, new MaterialPageRoute(
                   builder: (context) =>
@@ -202,7 +202,7 @@ class LoginScreen extends StatelessWidget {
               print('Patient');
               Navigator.push(context, new MaterialPageRoute(
                   builder: (context) =>
-                  new ListeMedecins(title : 'Title'))
+                  new ListeMedecins(title : 'Medecins'))
               );
             }
             //redirection after login
