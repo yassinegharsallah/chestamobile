@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_login/src/pages/ChestaDoctor/Question.dart';
 
 class Resultat extends StatefulWidget {
+  List<String> Qr ;
+  Resultat(List<String> questionsResults){
+    this.Qr = questionsResults ;
+  }
+
   @override
-  MapScreenState createState() => MapScreenState();
+  MapScreenState createState() => MapScreenState(this.Qr);
 }
 
 class MapScreenState extends State<Resultat>
     with SingleTickerProviderStateMixin {
   bool _status = true;
+  int score = 0 ;
   final FocusNode myFocusNode = FocusNode();
-
+  MapScreenState(List<String> questionsResults){
+        print('Resultat from Results page'+questionsResults.length.toString());
+       for(int i=0;i<questionsResults.length;i++){
+         print(i.toString()+questionsResults[i]);
+       }
+  }
   @override
   void initState() {
     // TODO: implement initState
@@ -198,7 +210,7 @@ class MapScreenState extends State<Resultat>
                                             fontWeight: FontWeight.bold),
                                       ),
                                       new Text(
-                                        '68.3%',
+                                        this.score.toString(),
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal),

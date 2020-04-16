@@ -28,7 +28,7 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
-
+  List<String> QuestionsResults = [] ;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -74,12 +74,15 @@ class _QuizPageState extends State<QuizPage> {
 //                    ),
 //                  );
               int x = quizBrain.nextQuestion();
+              this.QuestionsResults.add('true');
               if(x == 3){
-                print('TRUE CONDITION');
+                for(int i=0 ;i<this.QuestionsResults.length;i++){
+                  print('the answer for Question N'+i.toString()+this.QuestionsResults[i]);
+                }
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Resultat()));
+                        builder: (context) => Resultat(this.QuestionsResults)));
               }
                 });
                 print(result == true);
@@ -99,6 +102,7 @@ class _QuizPageState extends State<QuizPage> {
                   color: Colors.white,
                 ),
               ),
+
               onPressed: () {
                 bool result = quizBrain.getCorrectAnswer();
 
@@ -110,12 +114,16 @@ class _QuizPageState extends State<QuizPage> {
 //                    ),
 //                  );
              int  x = quizBrain.nextQuestion();
+             this.QuestionsResults.add('false');
              if(x == 4){
                print('TRUE CONDITION');
+               for(int i=0 ;i<this.QuestionsResults.length;i++){
+                 print('the answer for Question N'+i.toString()+this.QuestionsResults[i]);
+               }
                Navigator.push(
                    context,
                    MaterialPageRoute(
-                       builder: (context) => Resultat()));
+                       builder: (context) => Resultat(this.QuestionsResults)));
              }
                 });
                 print(result == false);

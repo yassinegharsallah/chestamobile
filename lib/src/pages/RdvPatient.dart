@@ -37,7 +37,6 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
   List data;
   List Patients ;
 
-
   _RendezVousPatientState() {
     /* Fetching Data Into ListView */
 
