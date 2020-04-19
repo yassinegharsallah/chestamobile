@@ -6,6 +6,7 @@ import 'package:flutter_login/src/pages/MedecinPatients.dart';
 import 'package:flutter_login/src/pages/SuivrePatient.dart';
 import 'package:http/http.dart' as http;
 import 'DetailRdv.dart';
+import 'Calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RendezVousMedecin extends StatefulWidget {
@@ -192,6 +193,12 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
             ListTile(
               leading: Icon(Icons.calendar_today),
               title: Text('Calendrier'),
+                onTap: ()=> {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Calendar()))
+                }
             ),
             ListTile(
               leading: Icon(Icons.forum),
