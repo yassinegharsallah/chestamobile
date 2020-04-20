@@ -64,6 +64,27 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
       return "Success";
     }
 
+
+    Future<String> getDataByDate(String date) async {
+      final prefs = await SharedPreferences.getInstance();
+//Mtensech tzid id el logged in user mel prefs
+      var response = await http.get(
+          Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvByDate"),
+          headers: {
+            "Accept": "application/json",
+            "token" :  date
+          }
+      );
+
+      this.setState(() {
+
+        this.data = json.decode(response.body);
+      });
+
+
+      return "Success";
+    }
+
 //Get Patient Data
     Future<String> getPatientData(String idpatient) async {
 //      final prefs = await SharedPreferences.getInstance();
@@ -75,7 +96,6 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
             "token" : idpatient
           }
       );
-      print('PATIENTS EXECUTION');
       this.setState(() {
 
         this.Patients = json.decode(response.body);
@@ -86,7 +106,6 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
     }
 //Get Patient Data
 
-    print('GET  DATA GET ');
     getData().then((data) async {
       for(int i=0 ; i<this.data.length;i++){
         //  print(this.data[i]["email"]);
@@ -294,19 +313,26 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
               startingDayOfWeek: StartingDayOfWeek.monday,
               onDaySelected: (date, events) {
                 String SelectedDate = date.toString();
-                /* Fetching Data Into ListView */
-/*
-                Future<String> getData(String id) async {
+
+
+
+
+                           /*here add the fetch rdv by date*/
+
+                Future<String> getDataByDate(String date) async {
+                  final prefs = await SharedPreferences.getInstance();
+//Mtensech tzid id el logged in user mel prefs
                   var response = await http.get(
                       Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvByDate"),
                       headers: {
                         "Accept": "application/json",
-                        "token" : id
+                        "token" :  date
                       }
                   );
 
                   this.setState(() {
-                    print(response.body);
+print('response from  get by date');
+print(response.body);
                     this.data = json.decode(response.body);
                   });
 
@@ -314,17 +340,47 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
                   return "Success";
                 }
 
-                // await getData()  ;  // <--- your code needs to pause until the Future returns.
-                print('S7SSSSSS W SOUSOU');
-                getData(date.toIso8601String()
-                ).then((data){
+//Get Patient Data
+                Future<String> getPatientData(String idpatient) async {
+//      final prefs = await SharedPreferences.getInstance();
+//Mtensech tzid id el logged in user mel prefs
+                  var response = await http.get(
+                      Uri.encodeFull("http://192.168.1.12:4000/user/GetUserByID"),
+                      headers: {
+                        "Accept": "application/json",
+                        "token" : idpatient
+                      }
+                  );
+                  this.setState(() {
+
+                    this.Patients = json.decode(response.body);
+                  });
+print('de la response from patieents data');
+  print(response.body);
+                  return "Success";
+                }
+//Get Patient Data
+
+
+             getDataByDate('2020-03-28T12:00:00.000Z').then((data) async {
                   for(int i=0 ; i<this.data.length;i++){
-                    print(this.data[i]["_id"]);
-                    //   print(i);
-                    items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"]));
+                    //  print(this.data[i]["email"]);
+                    getPatientData(this.data[i]["idmedecin"]).then((data) async {
+                      for(int j=0 ; j<this.data.length;j++){
+
+                        this.Patientsitems.add(new Patient(this.Patients[j]['nom'],this.Patients[j]['prenom']));
+                      }
+                    });
+                    items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"],this.data[i]["etat"],this.data[i]["_id"]));
                   }
                 });
-*/
+
+
+                /*here add the fetch rdv by date*/
+
+
+
+
               },
               builders: CalendarBuilders(
                 selectedDayBuilder: (context, date, events) => Container(
