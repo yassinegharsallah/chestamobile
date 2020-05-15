@@ -216,7 +216,7 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.deepPurple,
+                color: Colors.blueAccent,
               ),
               child: Text(
                 'CHESTA MOBILE',

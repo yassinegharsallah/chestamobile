@@ -45,7 +45,7 @@ class _SuivrePatientState extends State<SuivrePatient> {
           Uri.encodeFull("http://192.168.1.12:4000/user/GetAccessedPatients"),
           headers: {
             "Accept": "application/json",
-            "idmedecin" : prefs.getString('idLoggedinUser')
+            "idmedecin" : "5e5aa4ad190d8c2818a66a08"
           }
       );
 
@@ -141,7 +141,7 @@ class _SuivrePatientState extends State<SuivrePatient> {
                     ),
                   ],
                 ),
-                Icon(Icons.navigate_next, color: Colors.deepPurple),
+                Icon(Icons.navigate_next, color: Colors.blueAccent),
               ],
             ),
           )),

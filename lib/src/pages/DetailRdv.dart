@@ -48,7 +48,8 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
           Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvByID"),
           headers: {
             "Accept": "application/json",
-            "token" : prefs.get('idRendezVous')
+       //     "token" : prefs.get('idRendezVous')
+            "token" : "5e7a4fa12d3e7d2168665472"
           }
       );
 

@@ -33,7 +33,7 @@ class _MedecinPatientsState extends State<MedecinPatients> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => AccessPatient())),
-                color: Colors.deepPurple,
+                color: Colors.blueAccent,
                 textColor: Colors.white,
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                 splashColor: Colors.grey,
@@ -44,7 +44,7 @@ class _MedecinPatientsState extends State<MedecinPatients> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => SuivrePatient() )),
-                color: Colors.deepPurple,
+                color: Colors.blueAccent,
                 textColor: Colors.white,
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                 splashColor: Colors.grey,

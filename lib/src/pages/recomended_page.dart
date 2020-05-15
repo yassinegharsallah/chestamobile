@@ -35,7 +35,7 @@ class HomePageState extends State<RecommendedPage > {
           children: <Widget>[
             FlatButton(
               onPressed: () => {},
-              color: Colors.deepPurpleAccent,
+              color: Colors.lightBlue,
               padding: EdgeInsets.all(10.0),
               child: Column( // Replace with a Row for horizontal icon + text
                 children: <Widget>[
@@ -74,7 +74,7 @@ class HomePageState extends State<RecommendedPage > {
 
         ],
         currentIndex: selectedIndex,
-        fixedColor: Colors.deepPurpleAccent,
+        fixedColor: Colors.blue,
         unselectedItemColor: Colors.grey,
         onTap: onItemTapped  ,
       ),

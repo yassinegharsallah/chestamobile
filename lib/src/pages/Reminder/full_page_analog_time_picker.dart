@@ -36,7 +36,7 @@ class FullPageAnalogTimePicker extends StatelessWidget {
               padding: EdgeInsets.all(10.0),
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
-                backgroundColor: Colors.deepPurpleAccent,
+                backgroundColor: Colors.blueAccent,
                 child: Icon(Icons.add),
                 onPressed:
                   //print(_dateTime);

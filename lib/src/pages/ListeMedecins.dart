@@ -158,7 +158,7 @@ print(data);
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.deepPurple,
+                color: Colors.blueAccent,
               ),
               child: Text(
                 'CHESTA MOBILE',
@@ -191,7 +191,7 @@ print(data);
             ),
             ListTile(
               leading: Icon(Icons.calendar_today),
-              title: Text('Suivis Hebdomadaire'),
+              title: Text('Mon Suivi Quotidien'),
                 onTap: ()=>
                 { Navigator.push(
                     context,

@@ -189,9 +189,9 @@ class DateItem extends StatelessWidget {
   _dateItem(DateModel _item) {
     DateTime dateTime = _item.dateTime;
     return Card(
-      color: _item.isSelected ? Colors.deepPurple : Colors.white,
+      color: _item.isSelected ? Colors.blueAccent : Colors.white,
       child: Container(
-        color: _item.isSelected ? Colors.deepPurple : Colors.white,
+        color: _item.isSelected ? Colors.blueAccent : Colors.white,
         margin: EdgeInsets.all(8.0),
         alignment: Alignment.topCenter,
         height: 100.0,

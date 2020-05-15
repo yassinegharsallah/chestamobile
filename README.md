@@ -160,7 +160,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Login Demo',
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.blueAccent,
         accentColor: Colors.orange,
         cursorColor: Colors.orange,
         textTheme: TextTheme(

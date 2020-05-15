@@ -50,7 +50,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
           Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvMedecin"),
           headers: {
             "Accept": "application/json",
-            "token" : "5e73d3e073761a37a036ce3a"
+            "token" : "5e5aa4ad190d8c2818a66a08"
           }
       );
 
@@ -147,7 +147,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
                     ),
                   ],
                 ),
-                Icon(Icons.navigate_next, color: Colors.amber[800]),
+                Icon(Icons.navigate_next, color: Colors.blueGrey),
               ],
             ),
           )),
@@ -166,7 +166,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.deepPurple,
+                color: Colors.blueAccent,
               ),
               child: Text(
                 'CHESTA MOBILE',

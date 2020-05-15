@@ -47,12 +47,15 @@ dev_dependencies:
   google_nav_bar: ^2.0.1
   google_fonts: 0.2.0
   responsive_screen: ^1.0.0
+  flutter_cupertino_settings: ^0.3.0
   flutter_bloc: ^3.2.0
   dio: ^3.0.9
   equatable: ^1.1.1
   line_icons: ^0.2.0
   shimmer: ^1.1.0
   webview_flutter: ^0.3.19+9
+  mime: ^0.9.6+3
+  toast: ^0.1.5
   built_value: ^7.0.9
   built_collection: ^4.3.2
   url_launcher: ^5.4.2

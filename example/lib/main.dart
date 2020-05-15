@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
       title: 'Login Demo',
       theme: ThemeData(
         // brightness: Brightness.dark,
-        primarySwatch: Colors.deepPurple,
-        accentColor: Colors.orange,
-        cursorColor: Colors.orange,
+        primarySwatch: Colors.blue,
+        accentColor: Colors.blue,
+        cursorColor: Colors.blue,
         // fontFamily: 'SourceSansPro',
         textTheme: TextTheme(
           display2: TextStyle(
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'NotoSans',
             fontSize: 12.0,
             fontWeight: FontWeight.normal,
-            color: Colors.deepPurple[300],
+            color: Colors.blueAccent[300],
           ),
           display4: TextStyle(fontFamily: 'Quicksand'),
           display3: TextStyle(fontFamily: 'Quicksand'),

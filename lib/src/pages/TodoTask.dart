@@ -13,18 +13,18 @@ class ToDoListApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.yellow[700],
+          primarySwatch: Colors.blue,
+          accentColor: Colors.blueAccent[700],
           fontFamily: 'Lato',
           textTheme: ThemeData.light().textTheme.copyWith(
                 title: TextStyle(
-                  color: Colors.purple,
+                  color: Colors.blue,
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.bold,
                   fontSize: 28,
                 ),
                 subtitle: TextStyle(
-                  color: Colors.purple,
+                  color: Colors.blue,
                   fontFamily: 'Lato',
                   fontWeight: FontWeight.bold,
                   fontSize: 18,

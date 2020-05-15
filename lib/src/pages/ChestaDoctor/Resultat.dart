@@ -90,7 +90,7 @@ class MapScreenState extends State<Resultat>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     new CircleAvatar(
-                                      backgroundColor: Colors.deepPurple,
+                                      backgroundColor: Colors.blueAccent,
                                       radius: 25.0,
                                       child: new Icon(
                                         Icons.camera_alt,

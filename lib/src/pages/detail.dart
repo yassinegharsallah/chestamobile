@@ -34,7 +34,9 @@ class _MyDetailPageState extends State<MyDetailPage> {
   String availability = "intial";
   List<RendezVous> items = new List<RendezVous>();
   List data;
-  List<String> TimeArray ;
+  List<String> TimeArray = new List<String>();
+  List<String> TimeAvailableArray = new List<String>();
+
   _MyDetailPageState(Medecin Medc) {
     this.Medc = Medc;
     _controller = CalendarController();
@@ -108,7 +110,6 @@ class _MyDetailPageState extends State<MyDetailPage> {
                       );
 
                       this.setState(() {
-                        print(response.body);
                         this.data = json.decode(response.body);
                       });
 
@@ -116,18 +117,44 @@ class _MyDetailPageState extends State<MyDetailPage> {
                       return "Success";
                     }
 
-                    // await getData()  ;  // <--- your code needs to pause until the Future returns.
-                    print('S7SSSSSS W SOUSOU');
+                    this.TimeArray.add("09:00");
+                    this.TimeArray.add("10:00");
+                    this.TimeArray.add("11:00");
+                    this.TimeArray.add("12:00");
+                    this.TimeArray.add("13:00");
+                    this.TimeArray.add("14:00");
+                    this.TimeArray.add("15:00");
+                     bool TimeExist =false;
                     getData("2020-03-28T12:00:00.000+00:00").then((data){
 
                       for(int i=0 ; i<this.data.length;i++){
-                        TimeArray.add('iiiiij') ;
-                        //   print(i);
-                        for(int i=0;i<TimeArray.length;i++){
-                          print('Myriam');
-                          print("Time aray num "+i.toString()+' '+TimeArray[i]) ;
+                        String dateRdv = this.data[i]["date"] ;
+                        bool TimeExist = true ;
+                        dateRdv = dateRdv.substring(11,16) ;
+                        for(int x=0;x<this.TimeArray.length;x++){
+                          if(TimeArray[x] != dateRdv)
+                           {
+                             //check if occurence
+                              String tmp = TimeArray[x] ;
+                              print(tmp);
+                              bool t ;
+
+                              for(int j =0 ;j<TimeAvailableArray.length;j++){
+                                 if(TimeAvailableArray[j] == tmp){
+                                   t = true;
+                                 }else{
+                                   t = false;
+                                 }
+                                 print(t);
+                               }
+                             //check if occurence
+                              TimeAvailableArray.add(TimeArray[x]);
+                           }
                         }
-                        items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["date"]));
+
+
+
+                        items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],dateRdv));
                       }
                     });
 
@@ -163,7 +190,7 @@ class _MyDetailPageState extends State<MyDetailPage> {
                         height: 200.0,
                         child: new ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount:this.items.length,
+                          itemCount:this.TimeAvailableArray.length,
                           itemBuilder: (BuildContext ctxt, int index) {
                             return   new Container(
                                 padding: new EdgeInsets.only(top: 16.0),
@@ -171,9 +198,9 @@ class _MyDetailPageState extends State<MyDetailPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Icon(Icons.access_time,color: Colors.deepPurple),
-                                    //items[index].idMedecin
-                                    Text(items[index].idMedecin)
+                                    Icon(Icons.date_range,color: Colors.blueAccent),
+                                    //items[index].idMedecin-+
+                                    Text(TimeAvailableArray[index])
                                   ],
                                 ));
                           },
@@ -181,8 +208,13 @@ class _MyDetailPageState extends State<MyDetailPage> {
                       ),
                     ),
                     new IconButton(
-                      icon: Icon(Icons.remove_circle),
-                      onPressed: () {},
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FullPageAnalogTimePicker())) ;
+                      },
                     ),
                   ],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

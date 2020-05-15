@@ -8,7 +8,7 @@ class ExampleApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.deepPurple,
+        primaryColor: Colors.blueAccent,
         dividerColor: Colors.grey,
       ),
       home: DashboardScreen(),

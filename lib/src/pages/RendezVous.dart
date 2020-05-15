@@ -57,7 +57,7 @@ class RendezVous extends StatelessWidget {
     return MaterialApp(
       title: "WEB SERVICE",
       theme: ThemeData(
-        primaryColor: Colors.deepOrange,
+        primaryColor: Colors.lightBlue,
       ),
       home: Scaffold(
           appBar: AppBar(

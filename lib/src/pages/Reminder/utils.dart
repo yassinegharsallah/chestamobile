@@ -86,7 +86,7 @@ class SendButton extends StatelessWidget {
       padding: EdgeInsets.all(10.0),
       alignment: Alignment.bottomRight,
       child: FloatingActionButton(
-        backgroundColor: Colors.black87,
+        backgroundColor: Colors.blueAccent,
         child: Icon(Icons.arrow_forward),
         onPressed: () => sendAction,
       ),
