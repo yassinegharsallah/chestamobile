@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_login/src/CoronaDashboard/main.dart';
+//import 'package:flutter_login/src/CoronaDashboard/main.dart';
 import 'package:flutter_login/src/pages/MedecinPatients.dart';
 import 'package:flutter_login/src/pages/SuivrePatient.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +9,7 @@ import 'DetailRdv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InvitationMedecinPatient extends StatefulWidget {
-  InvitationMedecinPatient({Key key, this.title}) : super(key: key);
+  InvitationMedecinPatient({Key key, this.title ="Access Medecin"}) : super(key: key);
   final String title;
 
 
@@ -46,7 +46,7 @@ class _InvitationMedecinPatientState extends State<InvitationMedecinPatient> {
 //      final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetInvitation"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetInvitation"),
           headers: {
             "Accept": "application/json",
             "token" : "5e96eb390dcad84098033b9b"
@@ -67,7 +67,7 @@ class _InvitationMedecinPatientState extends State<InvitationMedecinPatient> {
 //      final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetUserByID"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetUserByID"),
           headers: {
             "Accept": "application/json",
             "token" : idpatient
@@ -111,14 +111,14 @@ class _InvitationMedecinPatientState extends State<InvitationMedecinPatient> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Not in stock'),
-          content: const Text('This item is no longer available'),
+          title: Text('Accepter invitation accees medecin'),
+          content: const Text('Le medecin Accedera a votre suivis'),
           actions: <Widget>[
             FlatButton(
               child: Text('Ok'),
               onPressed: () async {
                 await http.put(
-                    Uri.encodeFull("http://192.168.1.12:4000/user/AccepterInvitation"),
+                    Uri.encodeFull("http://192.168.1.65:4000/user/AccepterInvitation"),
                     headers: {
                       "Accept": "application/json",
                       "token": idAccess,
@@ -202,12 +202,12 @@ class _InvitationMedecinPatientState extends State<InvitationMedecinPatient> {
               ListTile(
                   leading: Icon(Icons.camera_alt),
                   title: Text('Detection Dashboard'),
-                  onTap: ()=> {
+                 /* onTap: ()=> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CoronaDashboard()))
-                  }
+                  }*/
               ),
               ListTile(
                 leading: Icon(Icons.description),
@@ -215,7 +215,7 @@ class _InvitationMedecinPatientState extends State<InvitationMedecinPatient> {
               ),
               ListTile(
                 leading: Icon(Icons.calendar_today),
-                title: Text('Calendrier'),
+                title: Text('Horaires Rendez-vous'),
               ),
               ListTile(
                 leading: Icon(Icons.forum),

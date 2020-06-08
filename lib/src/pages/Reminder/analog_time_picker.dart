@@ -64,7 +64,7 @@ class _AnalogTimePickerState extends State<AnalogTimePicker> {
               margin: EdgeInsets.all(8.0),
               alignment: Alignment.topLeft,
               child: Text(
-                "When was it?",
+                "Ajouter un Rappel Rendez-vous",
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
               ),
             ),

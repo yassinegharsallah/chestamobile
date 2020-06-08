@@ -30,7 +30,7 @@ class _TasksListState extends State<TasksList> {
 
     Future<String> getData() async {
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetSuivi"),
+          Uri.encodeFull("http://192.168.1.7:4000/user/GetSuivi"),
           headers: {
             "Accept": "application/json"
           }

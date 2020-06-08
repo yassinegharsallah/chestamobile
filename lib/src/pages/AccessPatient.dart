@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_login/src/CoronaDashboard/main.dart';
+//import 'package:flutter_login/src/CoronaDashboard/main.dart';
 import 'package:flutter_login/src/pages/MedecinPatients.dart';
 import 'package:http/http.dart' as http;
 import 'DetailRdv.dart';
@@ -91,7 +91,7 @@ class _AccessPatientState extends State<AccessPatient> {
      List data;
      String result ;
      var response = await http.get(
-         Uri.encodeFull("http://192.168.1.12:4000/user/GetAllPatients"),
+         Uri.encodeFull("http://192.168.1.65:4000/user/GetAllPatients"),
          headers: {
            "Accept": "application/json",
            "token" : myController.text
@@ -102,7 +102,7 @@ class _AccessPatientState extends State<AccessPatient> {
      print(data[0]['email']);
      if(data[0]['email'] != ''){
        print('patient existant');
-       var url ='http://192.168.1.12:4000/user/AddAccessPatientMedecin';
+       var url ='http://192.168.1.65:4000/user/AddAccessPatientMedecin';
        final prefs = await SharedPreferences.getInstance();
        var body = jsonEncode({
          'idpatient' : prefs.getString('idLoggedinUser'),

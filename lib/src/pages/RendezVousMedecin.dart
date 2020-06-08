@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_login/src/CoronaDashboard/main.dart';
+//import 'package:flutter_login/src/CoronaDashboard/main.dart';
 import 'package:flutter_login/src/pages/MedecinPatients.dart';
 import 'package:flutter_login/src/pages/SuivrePatient.dart';
 import 'package:http/http.dart' as http;
 import 'DetailRdv.dart';
 import 'Calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_login/src/pages/Forum/view/pages/home_page.dart';
+import 'Forum/main.dart';
 
 class RendezVousMedecin extends StatefulWidget {
   RendezVousMedecin({Key key, this.title}) : super(key: key);
@@ -40,6 +43,8 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
 
 
 
+
+
   _RendezVousMedecinState() {
     /* Fetching Data Into ListView */
 
@@ -47,7 +52,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
 //      final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvMedecin"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetRdvMedecin"),
           headers: {
             "Accept": "application/json",
             "token" : "5e5aa4ad190d8c2818a66a08"
@@ -65,17 +70,15 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
 
 //Get Patient Data
     Future<String> getPatientData(String idpatient) async {
-//      final prefs = await SharedPreferences.getInstance();
-//Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetUserByID"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetUserByID"),
           headers: {
             "Accept": "application/json",
             "token" : idpatient
           }
       );
-      print('PATIENTS EXECUTION');
       this.setState(() {
+
 
         this.Patients = json.decode(response.body);
       });
@@ -85,19 +88,23 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
     }
 //Get Patient Data
 
-    print('GET  DATA GET ');
     getData().then((data) async {
       for(int i=0 ; i<this.data.length;i++){
-      //  print(this.data[i]["email"]);
-        print(i); print('nfetchi fel patient');
-        getPatientData(this.data[i]["idpatient"]).then((data) async {
-          for(int j=0 ; j<this.data.length;j++){
-            print(this.Patients[j]['email']);
-            Patientsitems.add(new Patient(this.Patients[j]['nom'],this.Patients[j]['prenom']));
-            print('J VALUE :'); print(j);
-          }
-        });
-        items.add(new RendezVous("assets/images/patient.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"]));
+             if(this.data[i]['idpatient'] != null ){
+               print("RAFIKEEE"+i.toString()+" "+this.data[i]['idpatient']);
+               getPatientData(this.data?.elementAt(i)["idpatient"]).then((data) async {
+                 for(int j=0 ; j<this.data.length;j++){
+                   print(this.Patients?.elementAt(j)['email']);
+                   Patientsitems.add(new Patient(this.Patients?.elementAt(j)['nom'],this.Patients?.elementAt(j)['prenom']));
+                 }
+               });
+               items.add(new RendezVous("assets/images/patient.png", this.data?.elementAt(i)["idpatient"], this.data?.elementAt(i)["idmedecin"],this.data?.elementAt(i)["_id"]));
+
+             }else{
+               Patientsitems.add(new Patient("rokhs","darkhle3a"));
+               items.add(new RendezVous("assets/images/patient.png", "field", "sds","sdfsds"));
+
+             }
       }
     });
 
@@ -113,15 +120,12 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
         final username = prefs.getString('username');
         final email = prefs.getString('email');
         final idLoggedInuser = prefs.getString('idLoggedinUser');
-        print('**************************** USER INFO *****************************');
-        print(username);
-        print(email) ;
-        print("id Logged in user : "+idLoggedInuser) ;
+
         final snackBar = SnackBar(content: Text("Tap"));
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DetailRendezVousMedecin(data[index]["_id"])));
+                builder: (context) => DetailRendezVousMedecin(data?.elementAt(index)["_id"])));
       },
       child: Card(
           margin: EdgeInsets.all(8),
@@ -135,13 +139,13 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
                   children: <Widget>[
                     Hero(
                       tag: items[index],
-                      child: Image.asset(items[index].img),
+                      child: Image.asset(items?.elementAt(index).img),
                     ),
                     SizedBox(
                       width: 16,
                     ),
                     Text(
-                      Patientsitems[index].nom+' '+Patientsitems[index].prenom,
+                      Patientsitems[index].nom+' '+Patientsitems?.elementAt(index).prenom,
                       style:
                       TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                     ),
@@ -160,71 +164,14 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
       appBar: AppBar(
         title: const Text('CHESTA'),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blueAccent,
-              ),
-              child: Text(
-                'CHESTA MOBILE',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.camera_alt),
-              title: Text('Detection Dashboard'),
-                onTap: ()=> {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CoronaDashboard()))
-                }
-            ),
-            ListTile(
-              leading: Icon(Icons.description),
-              title: Text('Mes Rendez-vous'),
-            ),
-            ListTile(
-              leading: Icon(Icons.calendar_today),
-              title: Text('Calendrier'),
-                onTap: ()=> {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Calendar()))
-                }
-            ),
-            ListTile(
-              leading: Icon(Icons.forum),
-              title: Text('Forum'),
-            ),
-
-            ListTile(
-              leading: Icon(Icons.supervised_user_circle),
-              title: Text('Mes Patients'),
-                onTap: ()=> {
-                    Navigator.push(
-                context,
-                MaterialPageRoute(
-                builder: (context) => MedecinPatients()))
-            }),
-          ],
-        ),
-
-      ),
         body: Center(
           child: Stack(
             children: <Widget>[
-              ListView.builder(
-                itemCount: items.length,
+                  ListView.builder(
+                itemCount: Patientsitems.length,
                 itemBuilder: (context, index) => MedcCell(context, index),
-              ),
+              )
+            
             ],
           ),
         )

@@ -48,7 +48,7 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
     final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvPatient"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetRdvPatient"),
           headers: {
             "Accept": "application/json",
             "token" :  prefs.getString('idLoggedinUser')
@@ -69,7 +69,7 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
       final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvByDate"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetRdvByDate"),
           headers: {
             "Accept": "application/json",
             "token" :  date
@@ -90,7 +90,7 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
 //      final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetUserByID"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetUserByID"),
           headers: {
             "Accept": "application/json",
             "token" : idpatient
@@ -146,7 +146,7 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
                // Navigator.of(context).pop();
                 print('here'+idRendezVous) ;
                 await http.put(
-                    Uri.encodeFull("http://192.168.1.12:4000/user/UpdateRdvByID"),
+                    Uri.encodeFull("http://192.168.1.65:4000/user/UpdateRdvByID"),
                     headers: {
                       "Accept": "application/json",
                       "token": idRendezVous,
@@ -323,7 +323,7 @@ class _RendezVousPatientState extends State<RendezVousPatient> {
                   final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
                   var response = await http.get(
-                      Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvByDate"),
+                      Uri.encodeFull("http://192.168.1.65:4000/user/GetRdvByDate"),
                       headers: {
                         "Accept": "application/json",
                         "token" :  date
@@ -345,7 +345,7 @@ print(response.body);
 //      final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
                   var response = await http.get(
-                      Uri.encodeFull("http://192.168.1.12:4000/user/GetUserByID"),
+                      Uri.encodeFull("http://192.168.1.65:4000/user/GetUserByID"),
                       headers: {
                         "Accept": "application/json",
                         "token" : idpatient
@@ -363,6 +363,7 @@ print('de la response from patieents data');
 
 
              getDataByDate('2020-03-28T12:00:00.000Z').then((data) async {
+               this.Patientsitems.clear() ;
                   for(int i=0 ; i<this.data.length;i++){
                     //  print(this.data[i]["email"]);
                     getPatientData(this.data[i]["idmedecin"]).then((data) async {
@@ -409,7 +410,7 @@ print('de la response from patieents data');
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: items.length,
+                itemCount: this.Patientsitems.length,
                 itemBuilder: ((context, index) => MedcCell(context, index)
                 ),
               ),

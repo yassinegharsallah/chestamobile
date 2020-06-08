@@ -57,6 +57,7 @@ flutter:
   - assets/images/waiting.png
   - assets/images/patient.png
   - assets/images/document.png
+  - assets/images/chest.jpg
 
   fonts:
     - family: OpenSans

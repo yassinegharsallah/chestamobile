@@ -178,7 +178,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                   print(' ########## ADDED SUIVIS ##########') ;
                   _validateForm();
                   // LOGIN GET REQUEST IS HERE
-                  var url ='http://192.168.1.12:4000/user/AddSuivi';
+                  var url ='http://192.168.1.7:4000/user/AddSuivi';
                   final prefs = await SharedPreferences.getInstance();
                   var body = jsonEncode({
                  //   'idpatient' : prefs.getString('idLoggedinUser'),

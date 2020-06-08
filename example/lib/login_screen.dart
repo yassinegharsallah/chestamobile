@@ -5,7 +5,7 @@ import 'package:flutter_login/flutter_login.dart';
 import 'constants.dart';
 import 'custom_route.dart';
 import 'users.dart';
-import 'package:flutter_login/src/pages/home_page.dart';
+//import 'package:flutter_login/src/pages/home_page.dart';
 import 'package:http/http.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -162,7 +162,7 @@ class LoginScreen extends StatelessWidget {
         // LOGIN GET REQUEST IS HERE
         //AlexandertttTrent@esprit.tn
         //dshd58dfdfdfd
-        var url ='http://192.168.1.12:4000/user/login';
+        var url ='http://192.168.1.65:4000/user/login';
         var body = jsonEncode({
           'email' : loginData.name,
           'password' : loginData.password  });
@@ -179,7 +179,7 @@ class LoginScreen extends StatelessWidget {
           //JSON DECODEER
           var parsedJson = json.decode(response.body);
           if(parsedJson['token']!= null){
-            String urlLogin = 'http://192.168.1.12:4000/user/me';
+            String urlLogin = 'http://192.168.1.65:4000/user/me';
             Response GetLoginResponse = await get(urlLogin,headers: {"Content-type": "application/json","token":parsedJson['token']});
             print("********** LOGGED IN USER ***********")  ;
             print(GetLoginResponse.body);
@@ -224,10 +224,10 @@ class LoginScreen extends StatelessWidget {
         print('Signup info');
         print('Name: ${loginData.name}');
         print('Password: ${loginData.password}');
-        Navigator.push(context, new MaterialPageRoute(
+      /*  Navigator.push(context, new MaterialPageRoute(
             builder: (context) =>
             new HomePagex())
-        );
+        );*/
       },
       onSubmitAnimationCompleted: () {
 

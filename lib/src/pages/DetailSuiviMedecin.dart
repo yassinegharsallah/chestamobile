@@ -36,7 +36,7 @@ class _DetailSuiviMedecinsState extends State<DetailSuiviMedecins> {
   print("ID PATIENT "+token);
     Future<String> getData() async {
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetSuiviByidPatient"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetSuiviByidPatient"),
           headers: {
             "Accept": "application/json",
             "token" : '5e57b3d05acb9c4da455bbc2'
@@ -82,7 +82,7 @@ class _DetailSuiviMedecinsState extends State<DetailSuiviMedecins> {
                 onPressed: () async {
                   print('TEST TEST');
                   await http.put(
-                      Uri.encodeFull("http://192.168.1.12:4000/user/UpdateSuiviRemarque"),
+                      Uri.encodeFull("http://192.168.1.65:4000/user/UpdateSuiviRemarque"),
                       headers: {
                         "Accept": "application/json",
                         "token": '5e80a3bdb0704a72b86626be',

@@ -81,7 +81,7 @@ class RendezVous extends StatelessWidget {
                   onPressed: () async {
                     Post newPost = new Post(
                         userId: "123", id: 0, title: titleControler.text, body: bodyControler.text);
-                    Post p = await createPost("http://192.168.1.12:3000/addrdv/"+titleControler.text+"/"+bodyControler.text,
+                    Post p = await createPost("http://192.168.1.7:3000/addrdv/"+titleControler.text+"/"+bodyControler.text,
                         body: newPost.toMap());
                     print(p.title);
                   },

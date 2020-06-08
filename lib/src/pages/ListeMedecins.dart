@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_login/src/CoronaDashboard/main.dart';
 import 'package:flutter_login/src/pages/History.dart';
 import 'package:flutter_login/src/pages/InvitationPatient.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class _ListeMedecinsState extends State<ListeMedecins> {
 
     Future<String> getData() async {
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetAllMedecins"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetAllMedecins"),
           headers: {
             "Accept": "application/json"
           }
@@ -70,7 +71,7 @@ class _ListeMedecinsState extends State<ListeMedecins> {
 
   Future<String>  getSearchData(nomMedecin) async {
     var response = await http.get(
-        Uri.encodeFull("http://192.168.1.12:4000/user/GetMedecinByNom"),
+        Uri.encodeFull("http://192.168.1.65:4000/user/GetMedecinByNom"),
         headers: {
           "Accept": "application/json",
           "token": nomMedecin
@@ -150,7 +151,7 @@ print(data);
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Medecins')
+        title: Text('Visiter Medecin')
       ),
       drawer: Drawer(
         child: ListView(
@@ -172,10 +173,10 @@ print(data);
                 leading: Icon(Icons.assignment_ind),
                 title: Text('Visiter Medecins'),
                 onTap: ()=> {
-            /*      Navigator.push(
+                Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CoronaDashboard()))*/
+                          builder: (context) => CoronaDashboard()))
                 }
             ),
             ListTile(
@@ -200,7 +201,7 @@ print(data);
                 }),
             ListTile(
               leading: Icon(Icons.forum),
-              title: Text('Invitations'),
+              title: Text('Invitations Acces Medecin'),
                 onTap: ()=>
                 {
                   Navigator.push(
@@ -211,7 +212,7 @@ print(data);
 
             ListTile(
                 leading: Icon(Icons.history),
-                title: Text('Historique'),
+                title: Text('Historique Rendez-vous'),
                 onTap: ()=> {
                 Navigator.push(
                       context,

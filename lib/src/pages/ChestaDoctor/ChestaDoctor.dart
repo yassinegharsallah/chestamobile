@@ -9,7 +9,7 @@ class ChestaDoctor extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.grey.shade900,
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),

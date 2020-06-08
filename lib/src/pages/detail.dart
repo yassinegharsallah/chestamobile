@@ -102,7 +102,7 @@ class _MyDetailPageState extends State<MyDetailPage> {
 
                     Future<String> getData(String date) async {
                       var response = await http.get(
-                          Uri.encodeFull("http://192.168.1.12:4000/user/CheckDateAvailability"),
+                          Uri.encodeFull("http://192.168.1.65:4000/user/CheckDateAvailability"),
                           headers: {
                             "Accept": "application/json",
                             "token" : date
@@ -124,6 +124,7 @@ class _MyDetailPageState extends State<MyDetailPage> {
                     this.TimeArray.add("13:00");
                     this.TimeArray.add("14:00");
                     this.TimeArray.add("15:00");
+
                      bool TimeExist =false;
                     getData("2020-03-28T12:00:00.000+00:00").then((data){
 
@@ -148,6 +149,7 @@ class _MyDetailPageState extends State<MyDetailPage> {
                                  print(t);
                                }
                              //check if occurence
+
                               TimeAvailableArray.add(TimeArray[x]);
                            }
                         }
@@ -230,7 +232,7 @@ class _MyDetailPageState extends State<MyDetailPage> {
               color: Colors.blueAccent,
               onPressed: () async {
                 // LOGIN GET REQUEST IS HERE
-                var url ='http://192.168.1.12:4000/user/AddRdv';
+                var url ='http://192.168.1.65:4000/user/AddRdv';
                 final prefs = await SharedPreferences.getInstance();
                 var body = jsonEncode({
                   'idpatient' : prefs.getString('idLoggedinUser'),

@@ -43,7 +43,7 @@ class FullPageAnalogTimePicker extends StatelessWidget {
 
           () async {
     // LOGIN GET REQUEST IS HERE
-    var url ='http://192.168.1.12:4000/user/AddReminder';
+    var url ='http://192.168.1.7:4000/user/AddReminder';
     final prefs = await SharedPreferences.getInstance();
     String formattedDate = DateFormat('yyyy-MM-dd – kk:mm').format( _dateTime['date']);
     print('DATETIME CASSSSSSSSSSST'); print(formattedDate);

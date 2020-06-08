@@ -48,7 +48,7 @@ class _HistoryState extends State<History> {
       final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvPatient"),
+          Uri.encodeFull("http://192.168.1.7:4000/user/GetRdvPatient"),
           headers: {
             "Accept": "application/json",
             "token" :  prefs.getString('idLoggedinUser')
@@ -69,7 +69,7 @@ class _HistoryState extends State<History> {
       final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvByDate"),
+          Uri.encodeFull("http://192.168.1.7:4000/user/GetRdvByDate"),
           headers: {
             "Accept": "application/json",
             "token" :  date
@@ -90,7 +90,7 @@ class _HistoryState extends State<History> {
 //      final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetUserByID"),
+          Uri.encodeFull("http://192.168.1.7:4000/user/GetUserByID"),
           headers: {
             "Accept": "application/json",
             "token" : idpatient
@@ -146,7 +146,7 @@ class _HistoryState extends State<History> {
                 // Navigator.of(context).pop();
                 print('here'+idRendezVous) ;
                 await http.put(
-                    Uri.encodeFull("http://192.168.1.12:4000/user/UpdateRdvByID"),
+                    Uri.encodeFull("http://192.168.1.7:4000/user/UpdateRdvByID"),
                     headers: {
                       "Accept": "application/json",
                       "token": idRendezVous,
@@ -323,7 +323,7 @@ class _HistoryState extends State<History> {
                   final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
                   var response = await http.get(
-                      Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvByDate"),
+                      Uri.encodeFull("http://192.168.1.7:4000/user/GetRdvByDate"),
                       headers: {
                         "Accept": "application/json",
                         "token" :  date
@@ -345,7 +345,7 @@ class _HistoryState extends State<History> {
 //      final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
                   var response = await http.get(
-                      Uri.encodeFull("http://192.168.1.12:4000/user/GetUserByID"),
+                      Uri.encodeFull("http://192.168.1.7:4000/user/GetUserByID"),
                       headers: {
                         "Accept": "application/json",
                         "token" : idpatient

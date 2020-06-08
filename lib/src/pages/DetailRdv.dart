@@ -45,7 +45,7 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
     Future<String> getData() async {
       final prefs = await SharedPreferences.getInstance();
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetRdvByID"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetRdvByID"),
           headers: {
             "Accept": "application/json",
        //     "token" : prefs.get('idRendezVous')
@@ -109,7 +109,7 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
                 child: Text("Confirmer Rendez Vous"),
                 color: Colors.blue,
                 onPressed: () async =>   await http.put(
-            Uri.encodeFull("http://192.168.1.12:4000/user/UpdateRdvByID"),
+            Uri.encodeFull("http://192.168.1.65:4000/user/UpdateRdvByID"),
         headers: {
           "Accept": "application/json",
           "token": this.RequestedRdv.idRdv,
@@ -120,14 +120,14 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
                 child: Text("Annuler Rendez Vous"),
                 color: Colors.blue,
                 onPressed: () async =>   await http.delete(
-    Uri.encodeFull("http://192.168.1.12:4000/user/DeleteRdvByID"),
+    Uri.encodeFull("http://192.168.1.65:4000/user/DeleteRdvByID"),
         headers: {
           "Accept": "application/json",
           "token": this.RequestedRdv.idRdv,
         }
     )
                 ),  RaisedButton(
-                child: Text("Calendrier"),
+                child: Text("Horaires Rendez-vous"),
                 color: Colors.blue,
                 onPressed: () async =>  Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => Calendar(),

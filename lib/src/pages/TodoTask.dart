@@ -41,7 +41,7 @@ class ToDoListApp extends StatelessWidget {
                 ),
           ),
         ),
-        title: 'To Do List',
+        title: 'Suivi Hebdomadaire',
         home: Homepage(),
       ),
     );

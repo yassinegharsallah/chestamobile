@@ -42,7 +42,7 @@ class _SuivrePatientState extends State<SuivrePatient> {
     final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetAccessedPatients"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetAccessedPatients"),
           headers: {
             "Accept": "application/json",
             "idmedecin" : "5e5aa4ad190d8c2818a66a08"
@@ -63,7 +63,7 @@ class _SuivrePatientState extends State<SuivrePatient> {
 //      final prefs = await SharedPreferences.getInstance();
 //Mtensech tzid id el logged in user mel prefs
       var response = await http.get(
-          Uri.encodeFull("http://192.168.1.12:4000/user/GetUserByID"),
+          Uri.encodeFull("http://192.168.1.65:4000/user/GetUserByID"),
           headers: {
             "Accept": "application/json",
             "token" : idpatient
@@ -177,7 +177,7 @@ class _SuivrePatientState extends State<SuivrePatient> {
               ),
               ListTile(
                 leading: Icon(Icons.calendar_today),
-                title: Text('Calendrier'),
+                title: Text('Horaires Rendez-vous'),
               ),
               ListTile(
                 leading: Icon(Icons.forum),
