@@ -93,6 +93,7 @@ print(data);
      for(int i=0 ; i<this.data.length;i++){
        print('searched results');
        print(this.data[i]["email"]);
+       items.clear();
        items.add(new Medecin("assets/images/doctor.png", this.data[i]["nom"], this.data[i]["email"],this.data[i]["_id"]));
      }
    });

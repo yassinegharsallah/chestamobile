@@ -1,23 +1,28 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_login/src/pages/ChestaDoctor/Question.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Resultat extends StatefulWidget {
   List<String> Qr ;
+  static double score = 15 ;
   Resultat(List<String> questionsResults){
     this.Qr = questionsResults ;
   }
 
   @override
-  MapScreenState createState() => MapScreenState(this.Qr);
+  MapScreenState createState() => MapScreenState(this.Qr,score);
 }
 
 class MapScreenState extends State<Resultat>
     with SingleTickerProviderStateMixin {
   bool _status = true;
-  int score = 0 ;
+
+
   final FocusNode myFocusNode = FocusNode();
-  MapScreenState(List<String> questionsResults){
+  MapScreenState(List<String> questionsResults,double score){
         print('Resultat from Results page'+questionsResults.length.toString());
        for(int i=0;i<questionsResults.length;i++){
          print(i.toString()+questionsResults[i]);
@@ -25,12 +30,15 @@ class MapScreenState extends State<Resultat>
   }
   @override
   void initState() {
+    String t = "d";
     // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var rng = new Random();
+
     return new Scaffold(
         body: new Container(
           color: Colors.white,
@@ -210,7 +218,7 @@ class MapScreenState extends State<Resultat>
                                             fontWeight: FontWeight.bold),
                                       ),
                                       new Text(
-                                        this.score.toString(),
+                                       rng.nextInt(100).toString(),
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.normal),

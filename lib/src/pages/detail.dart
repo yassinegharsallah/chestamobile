@@ -116,6 +116,7 @@ class _MyDetailPageState extends State<MyDetailPage> {
 
                       return "Success";
                     }
+                    TimeArray.clear();
 
                     this.TimeArray.add("09:00");
                     this.TimeArray.add("10:00");
@@ -125,41 +126,41 @@ class _MyDetailPageState extends State<MyDetailPage> {
                     this.TimeArray.add("14:00");
                     this.TimeArray.add("15:00");
 
-                     bool TimeExist =false;
-                    getData("2020-03-28T12:00:00.000+00:00").then((data){
 
-                      for(int i=0 ; i<this.data.length;i++){
-                        String dateRdv = this.data[i]["date"] ;
-                        bool TimeExist = true ;
-                        dateRdv = dateRdv.substring(11,16) ;
-                        for(int x=0;x<this.TimeArray.length;x++){
-                          if(TimeArray[x] != dateRdv)
-                           {
-                             //check if occurence
-                              String tmp = TimeArray[x] ;
-                              print(tmp);
-                              bool t ;
 
-                              for(int j =0 ;j<TimeAvailableArray.length;j++){
-                                 if(TimeAvailableArray[j] == tmp){
-                                   t = true;
-                                 }else{
-                                   t = false;
-                                 }
-                                 print(t);
-                               }
-                             //check if occurence
 
-                              TimeAvailableArray.add(TimeArray[x]);
-                           }
+    getData("2020-03-28T12:00:00.000+00:00").then((data){
+    for(int i=0 ; i<this.data.length;i++){
+    String dateRdv = this.data[i]["date"] ;
+    bool TimeExist = true ;
+    dateRdv = dateRdv.substring(11,16) ;
+    for(int x=0;x<this.TimeArray.length;x++){
+    if(TimeArray[x] != dateRdv)
+    {
+    //check if occurence
+
+         for(int x=0;x<TimeArray.length;x++){
+                     if(TimeArray[x] == dateRdv){
+                         TimeArray.remove(TimeArray[x]);
+                       }
+
+                   }
+         TimeArray.toSet().toList();
+
+         for(int x=0;x<TimeArray.length;x++){
+                          print("affichage Time :"+TimeArray[x]);
+
                         }
+    //check if occurence
+
+    }
+    }
 
 
 
-                        items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],dateRdv));
-                      }
-                    });
-
+    items.add(new RendezVous("assets/images/hulk.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],dateRdv));
+    }
+    });
                   },
                   builders: CalendarBuilders(
                     selectedDayBuilder: (context, date, events) => Container(
@@ -191,33 +192,85 @@ class _MyDetailPageState extends State<MyDetailPage> {
                       child: SizedBox(
                         height: 200.0,
                         child: new ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount:this.TimeAvailableArray.length,
-                          itemBuilder: (BuildContext ctxt, int index) {
-                            return   new Container(
-                                padding: new EdgeInsets.only(top: 16.0),
-                                child: new Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Icon(Icons.date_range,color: Colors.blueAccent),
-                                    //items[index].idMedecin-+
-                                    Text(TimeAvailableArray[index])
-                                  ],
-                                ));
+                          itemCount: TimeArray.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text(TimeArray[index]+" h"),
+                              onTap: ()=> {
+                        //Alert
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                              return AlertDialog(
+                              title: Text("Confirmer"),
+                              content: Text("Rendez vous avec Dr "+this.Medc.title+" a "+TimeArray[index]+"h"),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('Confirmer'),
+                                    onPressed: () async {
+                                      // ADD RDV REQUEST IS HERE
+                                      var url ='http://192.168.1.65:4000/user/AddRdv';
+                                      final prefs = await SharedPreferences.getInstance();
+                                      var body = jsonEncode({
+                                        'idpatient' : prefs.getString('idLoggedinUser'),
+                                        'idmedecin' : this.Medc.idMedecin  });
+
+                                      print("Body: " + body);
+
+                                      http.post(url,
+                                          headers: {"Content-Type": "application/json"},
+                                          body: body
+                                      ).then((http.Response response) async {
+                                        print("Response status: ${response.statusCode}");
+                                        print("Response body: ${response.body}");
+                                        print(response.headers);
+                                        print(response.request);
+                                        //JSON DECODEER
+
+                                      });
+                                      // ADD RDV REQUEST IS HERE
+                                    },
+                                  ),
+                                  FlatButton(child: Text("Annuler"),)
+                                ]
+                                );
+                              })
+
+                              //Alert
+                              },
+                            );
                           },
                         ),
                       ),
                     ),
-                    new IconButton(
-                      icon: Icon(Icons.add),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => FullPageAnalogTimePicker())) ;
-                      },
-                    ),
+          new SizedBox.fromSize(
+            size: Size(80,80), // button wi
+            // dth and height
+            child: ClipOval(
+              child: Material(
+                color: Colors.blueAccent, // button color
+                child: InkWell(
+                  splashColor: Colors.green, // splash color
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FullPageAnalogTimePicker())) ;
+
+                  }, // button pressed
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.alarm_add), // icon
+                      Text("Rappel"), // text
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          )
+
                   ],
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 ),

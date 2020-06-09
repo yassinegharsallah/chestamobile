@@ -48,7 +48,7 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
           Uri.encodeFull("http://192.168.1.65:4000/user/GetRdvByID"),
           headers: {
             "Accept": "application/json",
-       //     "token" : prefs.get('idRendezVous')
+            //     "token" : prefs.get('idRendezVous')
             "token" : "5e7a4fa12d3e7d2168665472"
           }
       );
@@ -67,14 +67,14 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
     print('GET  DATA GET FROM DETAIL PAGE YE BRO ');
 
     getData().then((data) async {
-        this.RequestedRdv.idMedecin = this.data[0]["idmedecin"];
-        this.RequestedRdv.idpatient = this.data[0]["idpatient"];
-        this.RequestedRdv.Date = this.data[0]["date"];
-        this.RequestedRdv.heure = this.data[0]["heure"];
+      this.RequestedRdv.idMedecin = this.data[0]["idmedecin"];
+      this.RequestedRdv.idpatient = this.data[0]["idpatient"];
+      this.RequestedRdv.Date = this.data[0]["date"];
+      this.RequestedRdv.heure = this.data[0]["heure"];
 
-        final prefs = await SharedPreferences.getInstance();
-        this.RequestedRdv.idRdv = prefs.get('idRendezVous') ;
-        print('id rdv '); print(this.RequestedRdv.idRdv);
+      final prefs = await SharedPreferences.getInstance();
+      this.RequestedRdv.idRdv = prefs.get('idRendezVous') ;
+      print('id rdv '); print(this.RequestedRdv.idRdv);
     });
 
 
@@ -97,42 +97,36 @@ class _DetailRendezVousMedecinState extends State<DetailRendezVousMedecin> {
         body: ListView(
           children: <Widget>[
             ListTile(
-                leading: Icon(Icons.access_time),
-                title: Text(this.RequestedRdv.heure+' h')
-                ,
+              leading: Icon(Icons.access_time),
+              title: Text(this.RequestedRdv.idRdv??'default value')
+              ,
             ),
             ListTile(
               leading: Icon(Icons.date_range),
-              title: Text(this.RequestedRdv.Date.substring(0,10)),
+              title: Text(this.RequestedRdv.Date.substring(0,10)??'default value'),
             ),
             RaisedButton(
                 child: Text("Confirmer Rendez Vous"),
                 color: Colors.blue,
                 onPressed: () async =>   await http.put(
-            Uri.encodeFull("http://192.168.1.65:4000/user/UpdateRdvByID"),
-        headers: {
-          "Accept": "application/json",
-          "token": this.RequestedRdv.idRdv,
-          "etat": "confirmer"
-        }
-    )
-    ),            RaisedButton(
+                    Uri.encodeFull("http://192.168.1.65:4000/user/UpdateRdvByID"),
+                    headers: {
+                      "Accept": "application/json",
+                      "token": this.RequestedRdv.idRdv,
+                      "etat": "confirmer"
+                    }
+                )
+            ),            RaisedButton(
                 child: Text("Annuler Rendez Vous"),
                 color: Colors.blue,
                 onPressed: () async =>   await http.delete(
-    Uri.encodeFull("http://192.168.1.65:4000/user/DeleteRdvByID"),
-        headers: {
-          "Accept": "application/json",
-          "token": this.RequestedRdv.idRdv,
-        }
-    )
-                ),  RaisedButton(
-                child: Text("Horaires Rendez-vous"),
-                color: Colors.blue,
-                onPressed: () async =>  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => Calendar(),
+                    Uri.encodeFull("http://192.168.1.65:4000/user/DeleteRdvByID"),
+                    headers: {
+                      "Accept": "application/json",
+                      "token": this.RequestedRdv.idRdv,
+                    }
                 )
-            ))],
+            ),  ],
 
 //TableCalendar
         ),

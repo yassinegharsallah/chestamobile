@@ -82,13 +82,9 @@ class _SuivrePatientState extends State<SuivrePatient> {
 
     getData().then((data) async {
       for(int i=0 ; i<this.data.length;i++){
-        print('ID PATIENT : '+this.data[i]["idpatient"]);
-        print('ETAT : '+this.data[i]["etat"]);
         getPatientData(this.data[i]["idpatient"]).then((data) async {
           for(int j=0 ; j<this.data.length;j++){
-     //       print(this.Patients[j]['email']);
             Patientsitems.add(new Patient(this.Patients[j]['nom'],this.Patients[j]['prenom']));
-         //   print('J VALUE :'); print(j);
           }
         });
         items.add(new RendezVous("assets/images/patient.png", this.data[i]["idpatient"], this.data[i]["idmedecin"],this.data[i]["_id"]));
@@ -107,10 +103,7 @@ class _SuivrePatientState extends State<SuivrePatient> {
         final username = prefs.getString('username');
         final email = prefs.getString('email');
         final idLoggedInuser = prefs.getString('idLoggedinUser');
-      //  print('**************************** USER INFO *****************************');
-   //     print(username);
-   //     print(email) ;
-   //     print("id Logged in user : "+idLoggedInuser) ;
+
         final snackBar = SnackBar(content: Text("Tap"));
         Navigator.push(
             context,
@@ -201,7 +194,7 @@ class _SuivrePatientState extends State<SuivrePatient> {
           child: Stack(
             children: <Widget>[
               ListView.builder(
-                itemCount: items.length,
+                itemCount: this.Patientsitems.length,
                 itemBuilder: (context, index) => MedcCell(context, index),
               ),
             ],

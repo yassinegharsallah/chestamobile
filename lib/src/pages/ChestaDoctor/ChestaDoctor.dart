@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'quiz_brain.dart';
 import 'package:flutter_login/src/pages/ChestaDoctor/Resultat.dart' ;
+import 'package:shared_preferences/shared_preferences.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -29,6 +30,7 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Widget> scoreKeeper = [];
   List<String> QuestionsResults = [] ;
+  static double finalscore =1 ;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -66,7 +68,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 bool result = quizBrain.getCorrectAnswer();
-                setState(() {
+                setState(() async {
 //                  scoreKeeper.add(
 //                    Icon(
 //                      Icons.check,
@@ -74,18 +76,19 @@ class _QuizPageState extends State<QuizPage> {
 //                    ),
 //                  );
               int x = quizBrain.nextQuestion();
+              finalscore = finalscore * 7.5;
+              print("you clicked true "+x.toString()+" score now"+finalscore.toString());
               this.QuestionsResults.add('true');
-              if(x == 3){
-                for(int i=0 ;i<this.QuestionsResults.length;i++){
-                  print('the answer for Question N'+i.toString()+this.QuestionsResults[i]);
-                }
+             if(x == 5){
+               //add score
+               final prefs = await SharedPreferences.getInstance();
+               prefs.setDouble('score',finalscore);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => Resultat(this.QuestionsResults)));
               }
                 });
-                print(result == true);
               },
             ),
           ),
@@ -105,28 +108,27 @@ class _QuizPageState extends State<QuizPage> {
 
               onPressed: () {
                 bool result = quizBrain.getCorrectAnswer();
-
-                setState(() {
+                setState(() async {
 //                  scoreKeeper.add(
 //                    Icon(
-//                      Icons.close,
-//                      color: Colors.red,
+//                      Icons.check,
+//                      color: Colors.green,
 //                    ),
 //                  );
-             int  x = quizBrain.nextQuestion();
-             this.QuestionsResults.add('false');
-             if(x == 4){
-               print('TRUE CONDITION');
-               for(int i=0 ;i<this.QuestionsResults.length;i++){
-                 print('the answer for Question N'+i.toString()+this.QuestionsResults[i]);
-               }
-               Navigator.push(
-                   context,
-                   MaterialPageRoute(
-                       builder: (context) => Resultat(this.QuestionsResults)));
-             }
+                  int x = quizBrain.nextQuestion();
+                  finalscore += finalscore * 7.5;
+                  print("you clicked false "+x.toString()+" score now"+finalscore.toString());
+                  this.QuestionsResults.add('true');
+                    if(x == 5){
+                //add score
+                      final prefs = await SharedPreferences.getInstance();
+                      prefs.setDouble('score',finalscore);
+                      Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Resultat(this.QuestionsResults)));
+              }
                 });
-                print(result == false);
               },
             ),
           ),

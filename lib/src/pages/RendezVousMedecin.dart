@@ -91,7 +91,7 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
     getData().then((data) async {
       for(int i=0 ; i<this.data.length;i++){
              if(this.data[i]['idpatient'] != null ){
-               print("RAFIKEEE"+i.toString()+" "+this.data[i]['idpatient']);
+
                getPatientData(this.data?.elementAt(i)["idpatient"]).then((data) async {
                  for(int j=0 ; j<this.data.length;j++){
                    print(this.Patients?.elementAt(j)['email']);
@@ -164,6 +164,52 @@ class _RendezVousMedecinState extends State<RendezVousMedecin> {
       appBar: AppBar(
         title: const Text('CHESTA'),
       ),
+        //Drawer
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text(
+                  'Drawer Header',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+
+              ListTile(
+                leading: Icon(Icons.description),
+                title: Text('Mes Rendez-vous'),
+              ),
+              ListTile(
+                leading: Icon(Icons.calendar_today),
+                title: Text('Horaires Rendez-vous'),
+              ),
+              ListTile(
+                leading: Icon(Icons.forum),
+                title: Text('Forum'),
+              ),
+
+              ListTile(
+                  leading: Icon(Icons.supervised_user_circle),
+                  title: Text('Mes Patients'),
+                  onTap: ()=> {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MedecinPatients()))
+                  }),
+            ],
+          ),
+
+        )
+        //Drawer
+        ,
         body: Center(
           child: Stack(
             children: <Widget>[

@@ -239,7 +239,7 @@ class _InvitationMedecinPatientState extends State<InvitationMedecinPatient> {
           child: Stack(
             children: <Widget>[
               ListView.builder(
-                itemCount: items.length,
+                itemCount: this.Patientsitems.length,
                 itemBuilder: (context, index) => MedcCell(context, index),
               ),
             ],
